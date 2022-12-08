@@ -8,11 +8,16 @@ namespace Project_Game_Dev_2022
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Vector2 snelheid; 
+            
         Texture2D blokTexture;
         Rectangle hero;
         Rectangle box;
         Vector2 positie = new Vector2(0, 0);
         Vector2 positie2;
+        private int counter;
+        
+
 
 
         public Game1()
@@ -21,6 +26,7 @@ namespace Project_Game_Dev_2022
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             positie2 = new Vector2(120,100);
+            snelheid = new Vector2(5, 5);
         }
 
         protected override void Initialize()
@@ -53,16 +59,46 @@ namespace Project_Game_Dev_2022
 
             // TODO: Add your update logic here
 
+            KeyboardState state = Keyboard.GetState();
+            var direction = Vector2.Zero;
+            if (state.IsKeyDown(Keys.Left))
+            {
+                direction.X -= 1;
+            }
+            if (state.IsKeyDown(Keys.Right))
+            {
+                direction.X += 1;
+            }
+            if (state.IsKeyDown(Keys.Up))
+            {
+                direction.Y -= 1;
+            }
+            if (state.IsKeyDown(Keys.Down))
+            {
+                direction.Y += 1;
+            }
+            direction *= snelheid;
+            positie += direction;
+
+
+
+            counter++;
+            hero = new Rectangle((int)positie.X, (int)positie.Y, 10 * 5, 10 * 5);
+
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Navy);
             _spriteBatch.Begin();
-            _spriteBatch.Draw(blokTexture, hero, Color.Red);
-            _spriteBatch.Draw(blokTexture, box, Color.Green);
+            _spriteBatch.Draw(blokTexture, hero, Color.Green);
+            if (counter >= 50)
+            {
+                _spriteBatch.Draw(blokTexture, box, Color.Red);
 
+            }
 
             // TODO: Add your drawing code here
             _spriteBatch.End();
