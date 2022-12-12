@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using Project_Game_Dev_2022.interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

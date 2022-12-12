@@ -5,9 +5,9 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project_Game_Dev_2022.interfaces
+namespace Project_Game_Dev_2022.Input
 {
-     interface IInputReader
+    public interface IInputReader
     {
 
         Vector2 ReadInput();
