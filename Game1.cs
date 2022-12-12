@@ -52,7 +52,9 @@ namespace Project_Game_Dev_2022
 
 
             base.Initialize();
-            //hero = new Hero(_heroTexture,new KeyboardReader());
+            MovementManager mm = new MovementManager(collideablesLevel1);
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm);
+
             //movementmanager(hero, colliderLIst)
 
         }
@@ -74,7 +76,7 @@ namespace Project_Game_Dev_2022
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
         
-         //hero.Update();
+         hero.Update();
 
          base.Update(gameTime);
 
@@ -89,11 +91,11 @@ namespace Project_Game_Dev_2022
 
             foreach (var i in collideablesLevel1)
             {
-                _spriteBatch.Draw(blokTexture, i, Color.Red);
+                _spriteBatch.Draw(blokTexture, i, Color.Green);
             }
 
 
-          //  hero.Draw(_spriteBatch);
+            hero.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

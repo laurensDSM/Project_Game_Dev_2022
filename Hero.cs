@@ -7,6 +7,7 @@ using Project_Game_Dev_2022.interfaces;
 using SharpDX.MediaFoundation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,21 @@ namespace Project_Game_Dev_2022
         //private Vector2 toekomstigePositieHero;
         Rectangle hitBox;
         Texture2D heroTexture;
+        internal bool canJump;
+        internal bool isFalling;
+
         public IInputReader InputReader { get; set; }
+        public MovementManager MovementManager { get; set; }
 
 
 
-
-        public Hero(Texture2D blokTexture, IInputReader inputReader)
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm)
         {
+            canJump = true;
+            isFalling = true;
             heroTexture = blokTexture;
-
+            MovementManager = mm;
+            InputReader = inputReader;
             snelheid = new Vector2(5,5);
             positieHero = new Vector2(5, 5);
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
@@ -40,37 +47,28 @@ namespace Project_Game_Dev_2022
 
         public void Update()
         {
-            //var direction = InputReader.ReadInput();
+            Vector2 direction = InputReader.ReadInput();
 
+            direction = MovementManager.Move(this, direction);
 
+            var afstand = direction * snelheid;
+            var toekomstPositie = positieHero + afstand;
+            Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
 
-            //direction *= snelheid;
-            positieHero = snelheid; 
-
-
-
-
-
-            //movementmanager(direction);
-            //collision
-
-            positieHero += snelheid;
+            bool hasCollided = MovementManager.HasCollided(this,toekomstRectangle);
+            if (!hasCollided)
+            {
+                positieHero = toekomstPositie;
+            }
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
             
         }
-
-        private void movementmanager(  )
-        {
-
-
-        }
-
 
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(heroTexture,hitBox,Color.Green );
+            spriteBatch.Draw(heroTexture,hitBox,Color.Red );
 
         }
     }
