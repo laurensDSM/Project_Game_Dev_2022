@@ -34,7 +34,7 @@ namespace Project_Game_Dev_2022
             collideablesLevel1.Add(new Rectangle(0, 120, 10 * 8, 10 * 8));
             collideablesLevel1.Add(new Rectangle(160, 120, 10 * 8, 10 * 8));
             collideablesLevel1.Add(new Rectangle(320, 120, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(260, 250, 10 * 5, 10 * 5));
+            collideablesLevel1.Add(new Rectangle(270, 260, 10 * 4, 10 * 4));
             collideablesLevel1.Add(new Rectangle(400,120, 10 * 8, 10 * 8));
             collideablesLevel1.Add(new Rectangle(240, 400, 10 * 8, 10 * 8));
             collideablesLevel1.Add(new Rectangle(320, 400, 10 * 8, 10 * 8));

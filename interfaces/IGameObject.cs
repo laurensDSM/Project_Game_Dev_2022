@@ -11,7 +11,7 @@ namespace Project_Game_Dev_2022.interfaces
 {
     interface IGameObject
     {
-        void Update(GameTime gameTime);
+        void Update();
         void Draw(SpriteBatch spriteBatch);
     }
 }

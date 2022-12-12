@@ -16,15 +16,15 @@ namespace Project_Game_Dev_2022
 {
 
 
-    public class Hero // IGameObject
+    public class Hero : IGameObject
     {
         private Vector2 snelheid;
         private Vector2 positieHero;
-        //private Vector2 toekomstigePositieHero;
         Rectangle hitBox;
         Texture2D heroTexture;
         internal bool canJump;
         internal bool isFalling;
+        internal int counter;
 
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
@@ -37,6 +37,7 @@ namespace Project_Game_Dev_2022
             isFalling = true;
             heroTexture = blokTexture;
             MovementManager = mm;
+            counter = 0;
             InputReader = inputReader;
             snelheid = new Vector2(5,5);
             positieHero = new Vector2(5, 5);
@@ -49,17 +50,22 @@ namespace Project_Game_Dev_2022
         {
             Vector2 direction = InputReader.ReadInput();
 
-            direction = MovementManager.Move(this, direction);
+                direction = MovementManager.Move(this, direction);
 
-            var afstand = direction * snelheid;
-            var toekomstPositie = positieHero + afstand;
-            Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
 
-            bool hasCollided = MovementManager.HasCollided(this,toekomstRectangle);
-            if (!hasCollided)
-            {
-                positieHero = toekomstPositie;
-            }
+                var afstand = direction * snelheid;
+                var toekomstPositie = positieHero + afstand;
+                Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
+
+                bool hasCollided = MovementManager.HasCollided(this, toekomstRectangle);
+                if (!hasCollided)
+                {
+                    positieHero = toekomstPositie;
+
+                }
+            
+
+
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
             
         }
