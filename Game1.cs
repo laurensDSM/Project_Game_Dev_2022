@@ -16,6 +16,9 @@ namespace Project_Game_Dev_2022
         private SpriteBatch _spriteBatch;
         private Hero hero;
         private Texture2D _heroTexture;
+        private Texture2D _enemyTexture;
+
+        private Enemy enemy;
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
 
@@ -54,6 +57,7 @@ namespace Project_Game_Dev_2022
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
+            enemy = new Enemy(_enemyTexture);
 
             //movementmanager(hero, colliderLIst)
 
@@ -65,6 +69,7 @@ namespace Project_Game_Dev_2022
             blokTexture = new Texture2D(GraphicsDevice, 1, 1);
             blokTexture.SetData(new[] { Color.White });
             _heroTexture = blokTexture;
+            _enemyTexture = blokTexture;
 
 
 
@@ -77,6 +82,7 @@ namespace Project_Game_Dev_2022
                 Exit();
         
          hero.Update();
+         enemy.Update();
 
          base.Update(gameTime);
 
@@ -96,6 +102,7 @@ namespace Project_Game_Dev_2022
 
 
             hero.Draw(_spriteBatch);
+            enemy.Draw(_spriteBatch);   
 
             _spriteBatch.End();
 
