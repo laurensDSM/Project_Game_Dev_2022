@@ -39,7 +39,7 @@ namespace Project_Game_Dev_2022
             MovementManager = mm;
             counter = 0;
             InputReader = inputReader;
-            snelheid = new Vector2(5,5);
+            snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
 
@@ -50,31 +50,31 @@ namespace Project_Game_Dev_2022
         {
             Vector2 direction = InputReader.ReadInput();
 
-                direction = MovementManager.Move(this, direction);
+            direction = MovementManager.Move(this, direction);
 
 
-                var afstand = direction * snelheid;
-                var toekomstPositie = positieHero + afstand;
-                Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
+            var afstand = direction * snelheid;
+            var toekomstPositie = positieHero + afstand;
+            Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
 
-                bool hasCollided = MovementManager.HasCollided(this, toekomstRectangle);
-                if (!hasCollided)
-                {
-                    positieHero = toekomstPositie;
+            bool hasCollided = MovementManager.HasCollided(this, toekomstRectangle);
+            if (!hasCollided)
+            {
+                positieHero = toekomstPositie;
 
-                }
-            
+            }
+
 
 
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
-            
+
         }
 
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(heroTexture,hitBox,Color.Red );
+            spriteBatch.Draw(heroTexture, hitBox, Color.Red);
 
         }
     }

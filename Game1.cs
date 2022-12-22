@@ -2,11 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.Input;
-using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Data;
-using System.Diagnostics;
 
 namespace Project_Game_Dev_2022
 {
@@ -16,11 +12,9 @@ namespace Project_Game_Dev_2022
         private SpriteBatch _spriteBatch;
         private Hero hero;
         private Texture2D _heroTexture;
-        private Texture2D _enemyTexture;
-
-        private Enemy enemy;
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
+        private List<Rectangle> collideEnemy = new List<Rectangle>();
 
 
         Texture2D blokTexture;
@@ -57,7 +51,10 @@ namespace Project_Game_Dev_2022
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
-            enemy = new Enemy(_enemyTexture);
+<<<<<<< Updated upstream
+=======
+           // enemy = new Enemy(_enemyTexture);
+>>>>>>> Stashed changes
 
             //movementmanager(hero, colliderLIst)
 
@@ -69,7 +66,6 @@ namespace Project_Game_Dev_2022
             blokTexture = new Texture2D(GraphicsDevice, 1, 1);
             blokTexture.SetData(new[] { Color.White });
             _heroTexture = blokTexture;
-            _enemyTexture = blokTexture;
 
 
 
@@ -82,7 +78,10 @@ namespace Project_Game_Dev_2022
                 Exit();
         
          hero.Update();
-         enemy.Update();
+<<<<<<< Updated upstream
+=======
+         //enemy.Update();
+>>>>>>> Stashed changes
 
          base.Update(gameTime);
 
@@ -102,7 +101,10 @@ namespace Project_Game_Dev_2022
 
 
             hero.Draw(_spriteBatch);
-            enemy.Draw(_spriteBatch);   
+<<<<<<< Updated upstream
+=======
+            //enemy.Draw(_spriteBatch);   
+>>>>>>> Stashed changes
 
             _spriteBatch.End();
 

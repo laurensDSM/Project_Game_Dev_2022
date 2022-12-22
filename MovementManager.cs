@@ -10,12 +10,17 @@ namespace Project_Game_Dev_2022
     {
         public List<Rectangle> CollideablesLevel;
 
+
         public MovementManager(List<Rectangle> collideablesLevel)
         {
-            this.CollideablesLevel = collideablesLevel;
+            CollideablesLevel = collideablesLevel;
+
         }
 
-        internal bool HasCollided(Hero hero,  Rectangle toekomstRectangle)
+
+
+
+        internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)
         {
             if (toekomstRectangle.X > 800 || toekomstRectangle.X < 0 || toekomstRectangle.Y > 480 || toekomstRectangle.Y < 0)
             {
@@ -23,13 +28,13 @@ namespace Project_Game_Dev_2022
                 hero.isFalling = false;
             }
             //if (toekomstRectangle.X < 800 && toekomstRectangle.X > 0 && toekomstRectangle.Y < 480 && toekomstRectangle.Y > 0)
-           
+
             bool collided = false;
             foreach (var item in CollideablesLevel)
             {
                 if (toekomstRectangle.Intersects(item))
                 {
-                    if (toekomstRectangle.Left <item.Right && toekomstRectangle.Bottom-5 >item.Top)
+                    if (toekomstRectangle.Left < item.Right && toekomstRectangle.Bottom - 5 > item.Top)
                     {
                         hero.isFalling = true;
                         hero.canJump = false;
@@ -43,8 +48,8 @@ namespace Project_Game_Dev_2022
 
                     }
                     Debug.WriteLine("hero.canJump = true;");
-                    Debug.WriteLine($"colide"+hero.counter);
-                    
+                    Debug.WriteLine($"colide" + hero.counter);
+
                     collided = true;
 
                     break;
@@ -53,8 +58,8 @@ namespace Project_Game_Dev_2022
                 {
                     hero.isFalling = true;
 
-                    
-                    
+
+
                 }
             }
             return collided;
@@ -68,7 +73,7 @@ namespace Project_Game_Dev_2022
             {
 
 
-                if (hero.canJump&& hero.counter <=30)  //als canjump waar is dan is hij niet aan het vallen
+                if (hero.canJump && hero.counter <= 30)  //als canjump waar is dan is hij niet aan het vallen
                 {
                     hero.isFalling = false;
                     Debug.WriteLine("jump");
@@ -81,9 +86,9 @@ namespace Project_Game_Dev_2022
                     hero.isFalling = true;
                 }
 
-                
 
-            // als hij op geen blokje staat dan valt hij 
+
+                // als hij op geen blokje staat dan valt hij 
 
             }
             if (hero.isFalling)
@@ -92,5 +97,19 @@ namespace Project_Game_Dev_2022
             }
             return direction;
         }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
