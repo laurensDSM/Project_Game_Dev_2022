@@ -19,7 +19,7 @@ namespace Project_Game_Dev_2022.enemy_s
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
-            positieEnemy = new Vector2(640, 350);
+            positieEnemy = new Vector2(50, 350);
             enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }

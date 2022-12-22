@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using System.Collections.Generic;
 
@@ -11,7 +12,12 @@ namespace Project_Game_Dev_2022
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero;
+        private Enemy enemy1;
+        private Enemy enemy2;
+        private Enemy enemy3;
         private Texture2D _heroTexture;
+        private Texture2D _enemyTexture;
+
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
         private List<Rectangle> collideEnemy = new List<Rectangle>();
@@ -51,6 +57,10 @@ namespace Project_Game_Dev_2022
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
+            enemy1 = new EnemyBasic(_enemyTexture);
+            enemy2 = new EnemyTeleport(_enemyTexture);
+            enemy3 = new EnemyTrap(_enemyTexture);
+
 
 
         }
@@ -61,6 +71,8 @@ namespace Project_Game_Dev_2022
             blokTexture = new Texture2D(GraphicsDevice, 1, 1);
             blokTexture.SetData(new[] { Color.White });
             _heroTexture = blokTexture;
+            _enemyTexture = blokTexture;
+            
 
 
 
@@ -72,10 +84,13 @@ namespace Project_Game_Dev_2022
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
         
-         hero.Update();
+            hero.Update();
+            enemy1.Update();
+            enemy2.Update();
+            enemy3.Update();
 
 
-         base.Update(gameTime);
+            base.Update(gameTime);
 
         }
 
@@ -84,7 +99,9 @@ namespace Project_Game_Dev_2022
             GraphicsDevice.Clear(Color.Navy); // Achtergrond kleur van het scherm
 
             _spriteBatch.Begin();
-            
+            enemy1.Draw(_spriteBatch);
+            enemy2.Draw(_spriteBatch);
+            enemy3.Draw(_spriteBatch);
 
             foreach (var i in collideablesLevel1)
             {
