@@ -51,12 +51,7 @@ namespace Project_Game_Dev_2022
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
-<<<<<<< Updated upstream
-=======
-           // enemy = new Enemy(_enemyTexture);
->>>>>>> Stashed changes
 
-            //movementmanager(hero, colliderLIst)
 
         }
 
@@ -78,10 +73,7 @@ namespace Project_Game_Dev_2022
                 Exit();
         
          hero.Update();
-<<<<<<< Updated upstream
-=======
-         //enemy.Update();
->>>>>>> Stashed changes
+
 
          base.Update(gameTime);
 
@@ -101,10 +93,7 @@ namespace Project_Game_Dev_2022
 
 
             hero.Draw(_spriteBatch);
-<<<<<<< Updated upstream
-=======
-            //enemy.Draw(_spriteBatch);   
->>>>>>> Stashed changes
+
 
             _spriteBatch.End();
 
