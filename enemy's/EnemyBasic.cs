@@ -13,7 +13,7 @@ namespace Project_Game_Dev_2022.enemy_s
     {
         private Vector2 snelheid;
         private Vector2 positieEnemy;
-        Texture2D enemyTexture;
+        private Texture2D enemyTexture;
         Rectangle enemyBox;
         public EnemyBasic(Texture2D blokTexture)
         {

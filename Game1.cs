@@ -20,7 +20,7 @@ namespace Project_Game_Dev_2022
 
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
-        private List<Rectangle> collideEnemy = new List<Rectangle>();
+        private List<Enemy> enemyDB = new List<Enemy>();
 
 
         Texture2D blokTexture;
@@ -46,6 +46,17 @@ namespace Project_Game_Dev_2022
             collideablesLevel1.Add(new Rectangle(640, 400, 10 * 8, 10 * 8));
 
 
+            // enemy meegeven aan list
+
+            enemyDB.Add(new EnemyBasic(_enemyTexture));
+            // collideEnemy.Add(new EnemyBasic(_enemyTexture));
+            enemyDB.Add(new EnemyTeleport(_enemyTexture));
+            // collideEnemy.Add(new EnemyTeleport(_enemyTexture));
+            enemyDB.Add(new EnemyTrap(_enemyTexture));
+           // collideEnemy.Add(new EnemyBasic(_enemyTexture));
+
+
+
 
         }
 
@@ -57,9 +68,9 @@ namespace Project_Game_Dev_2022
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
-            enemy1 = new EnemyBasic(_enemyTexture);
-            enemy2 = new EnemyTeleport(_enemyTexture);
-            enemy3 = new EnemyTrap(_enemyTexture);
+            //enemy1 = new EnemyBasic(_enemyTexture);
+            //enemy2 = new EnemyTeleport(_enemyTexture);
+            //enemy3 = new EnemyTrap(_enemyTexture);
 
 
 
@@ -85,9 +96,13 @@ namespace Project_Game_Dev_2022
                 Exit();
         
             hero.Update();
-            enemy1.Update();
-            enemy2.Update();
-            enemy3.Update();
+            //enemy1.Update();
+            //enemy2.Update();
+            //enemy3.Update();
+            foreach (var i in enemyDB)
+            {
+                i.Update();
+            }
 
 
             base.Update(gameTime);
@@ -99,9 +114,15 @@ namespace Project_Game_Dev_2022
             GraphicsDevice.Clear(Color.Navy); // Achtergrond kleur van het scherm
 
             _spriteBatch.Begin();
-            enemy1.Draw(_spriteBatch);
-            enemy2.Draw(_spriteBatch);
-            enemy3.Draw(_spriteBatch);
+            //enemy1.Draw(_spriteBatch);
+            //enemy2.Draw(_spriteBatch);
+            //enemy3.Draw(_spriteBatch);
+
+
+            foreach (var i in enemyDB)
+            {
+                i.Draw(_spriteBatch);
+            }
 
             foreach (var i in collideablesLevel1)
             {
