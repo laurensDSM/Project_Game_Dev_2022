@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.Levels
 {
-    internal class Level1
+    public  class Level1
     {
 
+        public void Update()
+        {
+
+        }
+
+        public void Draw()
+        {
+
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.Animation;
+using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.interfaces;
 using SharpDX.MediaFoundation;
@@ -28,7 +29,8 @@ namespace Project_Game_Dev_2022
 
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
-
+        public List<Enemy> Enemies;
+        public List<EnemyBasic> EnemyBasics;
 
 
         public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm)
@@ -42,6 +44,9 @@ namespace Project_Game_Dev_2022
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
+            //Enemies = enemies;
+
+            
 
 
         }

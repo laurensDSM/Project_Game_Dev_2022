@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 
 namespace Project_Game_Dev_2022
 {
@@ -12,18 +13,23 @@ namespace Project_Game_Dev_2022
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero;
-        private Enemy enemy1;
-        private Enemy enemy2;
-        private Enemy enemy3;
+        //private Enemy enemy1;
+        //private Enemy enemy2;
+        //private Enemy enemy3;
         private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
 
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
-        private List<Enemy> enemyDB = new List<Enemy>();
+        // private List<Enemy> enemys = new List<Enemy>();
+
+        private List<EnemyBasic> enemyBasics = new List<EnemyBasic>();
 
 
         Texture2D blokTexture;
+
+        enum state { MENU, LEVEL1}
+
 
 
         public Game1()
@@ -48,14 +54,11 @@ namespace Project_Game_Dev_2022
 
             // enemy meegeven aan list
 
-            enemyDB.Add(new EnemyBasic(_enemyTexture));
-            // collideEnemy.Add(new EnemyBasic(_enemyTexture));
-            enemyDB.Add(new EnemyTeleport(_enemyTexture));
-            // collideEnemy.Add(new EnemyTeleport(_enemyTexture));
-            enemyDB.Add(new EnemyTrap(_enemyTexture));
-           // collideEnemy.Add(new EnemyBasic(_enemyTexture));
+            //enemys.Add(new EnemyBasic(_enemyTexture));
+            //enemys.Add(new EnemyTeleport(_enemyTexture));
+            //enemys.Add(new EnemyTrap(_enemyTexture));
 
-
+            enemyBasics.Add(new EnemyBasic(_enemyTexture));
 
 
         }
@@ -99,11 +102,15 @@ namespace Project_Game_Dev_2022
             //enemy1.Update();
             //enemy2.Update();
             //enemy3.Update();
-            foreach (var i in enemyDB)
+            //foreach (var i in enemys)
+            //{
+            //    i.Update();
+            //}
+
+            foreach (var i in enemyBasics)
             {
                 i.Update();
             }
-
 
             base.Update(gameTime);
 
@@ -119,7 +126,12 @@ namespace Project_Game_Dev_2022
             //enemy3.Draw(_spriteBatch);
 
 
-            foreach (var i in enemyDB)
+            //foreach (var i in enemys)
+            //{
+            //    i.Draw(_spriteBatch);
+            //}
+
+            foreach (var i in enemyBasics)
             {
                 i.Draw(_spriteBatch);
             }
