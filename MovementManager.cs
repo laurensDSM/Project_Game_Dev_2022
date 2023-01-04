@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Project_Game_Dev_2022.enemy_s;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,15 +10,53 @@ namespace Project_Game_Dev_2022
     public class MovementManager
     {
         public List<Rectangle> CollideablesLevel;
+        public List<Enemy> Enemies;
+        public List<EnemyTrap> Traps;
 
 
-        public MovementManager(List<Rectangle> collideablesLevel)
+
+        public MovementManager(List<Rectangle> collideablesLevel, List<Enemy> enemy, List<EnemyTrap> traps)
         {
             CollideablesLevel = collideablesLevel;
+            Enemies = enemy;
+            Traps = traps;
 
         }
 
+        internal bool HasCollidedWithTrap(Hero hero, Rectangle toekomstRectangle)
+        {
+            bool hasCollided = false;
+            foreach (var i in Traps)
+            {
+                if (toekomstRectangle.Intersects(i))
+                {
+                    hasCollided = true;
+                }
+            }
 
+
+
+
+
+            return hasCollided;
+        }
+        internal bool HasCollidedWithEnemie(Hero hero, Rectangle toekomstRectangle)
+        {
+            bool hasCollided = false;
+            foreach (var i in Enemies)
+            {
+                if (toekomstRectangle.Intersects(i))
+                {
+                    hasCollided = true;
+                }
+            }
+
+
+
+
+
+            return hasCollided;
+        }
 
 
         internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)
@@ -47,8 +86,8 @@ namespace Project_Game_Dev_2022
                         hero.counter = 0;
 
                     }
-                    Debug.WriteLine("hero.canJump = true;");
-                    Debug.WriteLine($"colide" + hero.counter);
+                   // Debug.WriteLine("hero.canJump = true;");
+                   // Debug.WriteLine($"colide" + hero.counter);
 
                     collided = true;
 
@@ -76,9 +115,9 @@ namespace Project_Game_Dev_2022
                 if (hero.canJump && hero.counter <= 30)  //als canjump waar is dan is hij niet aan het vallen
                 {
                     hero.isFalling = false;
-                    Debug.WriteLine("jump");
+                  //  Debug.WriteLine("jump");
                     hero.counter++;
-                    Debug.WriteLine(hero.counter);
+                  //  Debug.WriteLine(hero.counter);
 
                 }
                 else  //als canjump nietwaar is dan is hij  aan het vallen

@@ -30,10 +30,11 @@ namespace Project_Game_Dev_2022
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
         public List<Enemy> Enemies;
-        public List<EnemyTraps> EnemyBasics;
+        public List<EnemyTrap> Traps;
 
 
-        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm)
+
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm, List<Enemy> enemy, List<EnemyTrap> traps)
         {
             canJump = true;
             isFalling = true;
@@ -44,10 +45,8 @@ namespace Project_Game_Dev_2022
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
-            //Enemies = enemies;
-
-            
-
+            Enemies = enemy;
+            Traps = traps;
 
         }
 
@@ -63,12 +62,15 @@ namespace Project_Game_Dev_2022
             Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
 
             bool hasCollided = MovementManager.HasCollided(this, toekomstRectangle);
+            bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
+            bool hasCollidedWithEnemie= MovementManager.HasCollidedWithEnemie(this, toekomstRectangle);
             if (!hasCollided)
             {
                 positieHero = toekomstPositie;
 
             }
 
+            
 
 
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);

@@ -34,7 +34,7 @@ namespace Project_Game_Dev_2022.enemy_s
         public override void Update()
         {
             counter++;
-            Debug.Write(counter);
+            //Debug.Write(counter);
             Random rand = new Random();
             DateTime StartUpdate = DateTime.Now;
             TimeSpan span = (Start - StartUpdate );
@@ -42,10 +42,10 @@ namespace Project_Game_Dev_2022.enemy_s
 
             if (tijdsverschil <=  -10)
             {
-                Debug.WriteLine("Ja 10 seconde");
+                //Debug.WriteLine("Ja 10 seconde");
            
             int mogelijkePositie = rand.Next(0, 5);
-            Debug.WriteLine(mogelijkePositie);
+           // Debug.WriteLine(mogelijkePositie);
             
             switch (mogelijkePositie)
             {
@@ -81,7 +81,7 @@ namespace Project_Game_Dev_2022.enemy_s
             positieEnemy += snelheid;
             positieRechts = positieEnemy - maximalePositieEnemy;
             positieLinks = positieEnemy + maximalePositieEnemy;
-            Debug.Write($"Rechts" + positieRechts + "links" + positieLinks);
+          //  Debug.Write($"Rechts" + positieRechts + "links" + positieLinks);
             if (positieEnemy.X > positieLinks.X || positieEnemy.X < positieRechts.X)
             {
                 snelheid.X *= -1;
