@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.enemy_s;
+using Project_Game_Dev_2022.money;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,15 +14,18 @@ namespace Project_Game_Dev_2022
         public List<EnemyTeleport> EnemiesTeleport;
         public List<EnemyTrap> Traps;
         public List<EnemyBasic> EnemiesBasic;
+        public List<Money> Money;
 
 
 
 
-        public MovementManager(List<Rectangle> collideablesLevel, List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic)
+
+        public MovementManager(List<Rectangle> collideablesLevel, List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money)
         {
             CollideablesLevel = collideablesLevel;
             EnemiesTeleport = enemyTeleport;
             Traps = traps;
+            Money = money;
             EnemiesBasic = enemiesBasic;
         }
 
@@ -35,7 +39,7 @@ namespace Project_Game_Dev_2022
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
                     hasCollided = true;
-                    Debug.WriteLine(" colide");
+                   // Debug.WriteLine(" colide");
 
 
                 }
@@ -77,7 +81,6 @@ namespace Project_Game_Dev_2022
                     {
                         hasCollided = true;
                          i.IsAlive = false;
-                        Debug.WriteLine("collision");
                     }
                 }
                 else
@@ -87,6 +90,32 @@ namespace Project_Game_Dev_2022
             }
 
             return hasCollided;
+        }
+
+        internal bool HasCollidedWithMoney(Hero hero, Rectangle toekomstRectangle)
+        {
+            bool hasCollided = false;
+
+            foreach (var i in Money)
+            {
+                if (toekomstRectangle.Intersects(i.MoneyBox))
+                {
+
+                        hasCollided = true;
+                        i.IsUsed = true;
+                    hero.money++;
+                        //Debug.WriteLine("collision");
+                 
+                }
+                else
+                {
+                    hasCollided = false;
+                }
+            }
+
+
+            return hasCollided;
+
         }
 
 

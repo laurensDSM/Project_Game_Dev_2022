@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
+using Project_Game_Dev_2022.money;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -20,9 +21,12 @@ namespace Project_Game_Dev_2022
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
 
+
         private List<EnemyTeleport> enemysTeleport = new List<EnemyTeleport>();
         private List<EnemyTrap> enemyTraps = new List<EnemyTrap>();
         private List<EnemyBasic> enemyBasic = new List<EnemyBasic>();
+        private List<Money> money = new List<Money>();
+
 
 
         Texture2D blokTexture;
@@ -51,6 +55,8 @@ namespace Project_Game_Dev_2022
 
 
 
+
+
         }
 
         protected override void Initialize()
@@ -59,7 +65,7 @@ namespace Project_Game_Dev_2022
 
 
             base.Initialize();
-            MovementManager mm = new MovementManager(collideablesLevel1, enemysTeleport, enemyTraps, enemyBasic);
+            MovementManager mm = new MovementManager(collideablesLevel1, enemysTeleport, enemyTraps, enemyBasic, money);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
 
             //Teleport
@@ -81,7 +87,13 @@ namespace Project_Game_Dev_2022
             enemyBasic.Add(new EnemyBasic(_enemyTexture, EnemyLocatieBasic1));
 
 
-  
+            //money
+            Vector2 MoneyLocatie1 = new Vector2(120, 370);
+            Vector2 MoneyLocatie2 = new Vector2(170, 370);
+
+            money.Add(new Money(_enemyTexture, MoneyLocatie1));
+
+            money.Add(new Money(_enemyTexture, MoneyLocatie2));
 
 
 
@@ -123,6 +135,10 @@ namespace Project_Game_Dev_2022
                 item.Update();
             }
 
+            foreach (var item in money)
+            {
+                item.Update();
+            }
             base.Update(gameTime);
 
         }
@@ -148,11 +164,16 @@ namespace Project_Game_Dev_2022
             {
                 i.Draw(_spriteBatch);
             }
+            foreach (var item in money)
+            {
+                item.Draw(_spriteBatch);
+            }
 
             foreach (var i in collideablesLevel1)
             {
                 _spriteBatch.Draw(blokTexture, i, Color.Green);
             }
+            
 
 
             hero.Draw(_spriteBatch);

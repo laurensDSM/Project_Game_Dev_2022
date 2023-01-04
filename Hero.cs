@@ -29,6 +29,8 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithTrap;
         internal bool collidedWithEnemyTeleport;
         internal bool collidedWithEnemyBasic;
+        internal bool collidedWithMoney;
+        internal int money;
 
 
 
@@ -75,6 +77,8 @@ namespace Project_Game_Dev_2022
             bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
             bool hasCollidedWithEnemieTeleport= MovementManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
             bool hasCollidedWithEnemieBasic = MovementManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
+            bool hasCollidedWithMoney = MovementManager.HasCollidedWithMoney(this, toekomstRectangle);
+
 
             if (hasCollidedWithTrap)
             {
