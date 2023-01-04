@@ -15,6 +15,7 @@ namespace Project_Game_Dev_2022.enemy_s
         private Vector2 positieEnemy;
         Texture2D enemyTexture;
         public Rectangle EnemyBox;
+
         public EnemyTrap(Texture2D blokTexture, Vector2 positie)
         {
             enemyTexture = blokTexture;

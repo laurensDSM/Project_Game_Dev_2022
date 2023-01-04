@@ -10,17 +10,19 @@ namespace Project_Game_Dev_2022
     public class MovementManager
     {
         public List<Rectangle> CollideablesLevel;
-        public List<Enemy> Enemies;
+        public List<EnemyTeleport> EnemiesTeleport;
         public List<EnemyTrap> Traps;
+        public List<EnemyBasic> EnemiesBasic;
 
 
 
-        public MovementManager(List<Rectangle> collideablesLevel, List<Enemy> enemy, List<EnemyTrap> traps)
+
+        public MovementManager(List<Rectangle> collideablesLevel, List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic)
         {
             CollideablesLevel = collideablesLevel;
-            Enemies = enemy;
+            EnemiesTeleport = enemyTeleport;
             Traps = traps;
-
+            EnemiesBasic = enemiesBasic;
         }
 
         internal bool HasCollidedWithTrap(Hero hero, Rectangle toekomstRectangle)
@@ -28,9 +30,29 @@ namespace Project_Game_Dev_2022
             bool hasCollided = false;
             foreach (var i in Traps)
             {
+
+            
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
                     hasCollided = true;
+                    Debug.WriteLine(" colide");
+
+
+                }
+
+            }
+
+            return hasCollided;
+        }
+        internal bool HasCollidedWithEnemieTeleport(Hero hero, Rectangle toekomstRectangle)
+        {
+            bool hasCollided = false;
+            foreach (var i in EnemiesTeleport)
+            {
+                if (toekomstRectangle.Intersects(i.EnemyBox))
+                {
+                    hasCollided = true;
+                    i.IsAlive = false; 
                 }
                 else
                 {
@@ -40,23 +62,24 @@ namespace Project_Game_Dev_2022
 
             return hasCollided;
         }
-        //internal bool HasCollidedWithEnemie(Hero hero, Rectangle toekomstRectangle)
-        //{
-        //    bool hasCollided = false;
-        //    foreach (var i in Enemies)
-        //    {
-        //        if (toekomstRectangle.Intersects(i))
-        //        {
-        //            hasCollided = true;
-        //        }
-        //        else
-        //        {
-        //            hasCollided = false;
-        //        }
-        //    }
+        internal bool HasCollidedWithEnemieBasic(Hero hero, Rectangle toekomstRectangle)
+        {
+            bool hasCollided = false;
+            foreach (var i in EnemiesBasic)
+            {
+                if (toekomstRectangle.Intersects(i.EnemyBox))
+                {
+                    hasCollided = true;
+                    i.IsAlive = false;
+                }
+                else
+                {
+                    hasCollided = false;
+                }
+            }
 
-        //    return hasCollided;
-        //}
+            return hasCollided;
+        }
 
 
         internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)

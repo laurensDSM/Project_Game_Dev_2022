@@ -16,23 +16,29 @@ namespace Project_Game_Dev_2022.enemy_s
         private Vector2 maximalePositieEnemy;
         private Vector2 positieRechts;
         private Vector2 positieLinks;
+        private Vector2 positieEnemyDead;
+
 
         Texture2D enemyTexture;
-        Rectangle enemyBox;
+        public Rectangle EnemyBox;
         private int counter;
         DateTime Start = DateTime.Now;
+        public bool IsAlive = true;
 
         public EnemyTeleport(Texture2D blokTexture)
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
             positieEnemy = new Vector2(180, 70);
+            positieEnemyDead = new Vector2(-20, -20);
             maximalePositieEnemy = new Vector2(20, 20);
-            enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
         public override void Update()
         {
+
+            if (IsAlive) {
             counter++;
             //Debug.Write(counter);
             Random rand = new Random();
@@ -88,12 +94,23 @@ namespace Project_Game_Dev_2022.enemy_s
             }
 
 
-            enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+            }
+            else
+            {
+                positieEnemy = positieEnemyDead;
+            }
+            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(enemyTexture, enemyBox, Color.Pink);
+            if (IsAlive)
+            {
+                spriteBatch.Draw(enemyTexture, EnemyBox, Color.Pink);
+
+            }
 
         }
     }

@@ -27,15 +27,18 @@ namespace Project_Game_Dev_2022
         internal bool isFalling;
         internal int counter;
         internal bool collidedWithTrap;
+        internal bool collidedWithEnemyTeleport;
+        internal bool collidedWithEnemyBasic;
+
+
 
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
-        public List<Enemy> Enemies;
-        public List<EnemyTrap> Traps;
 
 
 
-        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm, List<Enemy> enemy, List<EnemyTrap> traps)
+
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm)
         {
             canJump = true;
             isFalling = true;
@@ -46,9 +49,7 @@ namespace Project_Game_Dev_2022
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
-            Enemies = enemy;
-            Traps = traps;
-            
+
 
         }
 
@@ -64,29 +65,53 @@ namespace Project_Game_Dev_2022
             Rectangle toekomstRectangle = new Rectangle((int)toekomstPositie.X, (int)toekomstPositie.Y, 10 * 5, 10 * 5);
 
             bool hasCollided = MovementManager.HasCollided(this, toekomstRectangle);
-            bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
-           // bool hasCollidedWithEnemie= MovementManager.HasCollidedWithEnemie(this, toekomstRectangle);
             if (!hasCollided)
             {
                 positieHero = toekomstPositie;
 
             }
+
+            bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
+            bool hasCollidedWithEnemieTeleport= MovementManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
+            bool hasCollidedWithEnemieBasic = MovementManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
+
             if (hasCollidedWithTrap)
             {
                 // hero moet dood zijn 
                 // of minder leven 3 levens
-                Debug.Write("Collided with trap");
+                Debug.WriteLine("Collided with trap");
                 collidedWithTrap = true;
 
             }
-
-            //if (hasCollidedWithEnemie)
-            //{
-            //    //hero krijgt punten
-            //}
+            else
+            {
+                collidedWithTrap = false;
 
 
-            
+            }
+
+
+
+            if (hasCollidedWithEnemieTeleport)
+            {
+                collidedWithEnemyTeleport = true;
+                //hero krijgt punten
+            }
+            else
+            {
+                collidedWithEnemyTeleport= false;
+            }
+
+            if (hasCollidedWithEnemieBasic)
+            {
+                collidedWithEnemyBasic = true;
+                //hero krijgt punten
+            }
+            else
+            {
+                collidedWithEnemyBasic = false;
+            }
+
 
 
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
@@ -97,11 +122,12 @@ namespace Project_Game_Dev_2022
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (collidedWithTrap)
+            if (collidedWithTrap || collidedWithEnemyTeleport || collidedWithEnemyBasic)
             {
                 spriteBatch.Draw(heroTexture, hitBox, Color.DarkGray);
 
             }
+
             else
             {
                 spriteBatch.Draw(heroTexture, hitBox, Color.Red);

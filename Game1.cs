@@ -19,8 +19,10 @@ namespace Project_Game_Dev_2022
 
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
-        private List<Enemy> enemys = new List<Enemy>();
+
+        private List<EnemyTeleport> enemysTeleport = new List<EnemyTeleport>();
         private List<EnemyTrap> enemyTraps = new List<EnemyTrap>();
+        private List<EnemyBasic> enemyBasic = new List<EnemyBasic>();
 
 
         Texture2D blokTexture;
@@ -58,18 +60,31 @@ namespace Project_Game_Dev_2022
 
 
             base.Initialize();
-            MovementManager mm = new MovementManager(collideablesLevel1, enemys, enemyTraps);
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm, enemys, enemyTraps);
-            enemys.Add(new EnemyTraps(_enemyTexture));
-            enemys.Add(new EnemyTeleport(_enemyTexture));
+            MovementManager mm = new MovementManager(collideablesLevel1, enemysTeleport, enemyTraps, enemyBasic);
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm);
+
+            //Teleport
+            enemysTeleport.Add(new EnemyTeleport(_enemyTexture));
+            enemysTeleport.Add(new EnemyTeleport(_enemyTexture));
+
+
 
             //TRAP valstrik
-             Vector2 EnemyLocatie1 = new Vector2(50, 350);
+            Vector2 EnemyLocatie1 = new Vector2(50, 350);
              Vector2 EnemyLocatie2 = new Vector2(200, 350);
-
+             Vector2 EnemyLocatie3 = new Vector2(400, 350);
 
             enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie1));
             enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie2));
+            enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie3));
+
+            //Basic
+            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
+            enemyBasic.Add(new EnemyBasic(_enemyTexture, EnemyLocatieBasic1));
+
+
+  
+
 
 
 
@@ -96,7 +111,7 @@ namespace Project_Game_Dev_2022
         
             hero.Update();
 
-            foreach (var i in enemys)
+            foreach (var i in enemysTeleport)
             {
                 i.Update();
             }
@@ -104,6 +119,10 @@ namespace Project_Game_Dev_2022
             foreach (var i in enemyTraps)
             {
                 i.Update();
+            }
+            foreach (var item in enemyBasic)
+            {
+                item.Update();
             }
 
             base.Update(gameTime);
@@ -118,12 +137,16 @@ namespace Project_Game_Dev_2022
 
 
 
-            foreach (var i in enemys)
+            foreach (var i in enemysTeleport)
             {
                 i.Draw(_spriteBatch);
             }
 
             foreach (var i in enemyTraps)
+            {
+                i.Draw(_spriteBatch);
+            }
+            foreach (var i in enemyBasic)
             {
                 i.Draw(_spriteBatch);
             }

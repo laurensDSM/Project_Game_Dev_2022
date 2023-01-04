@@ -9,37 +9,49 @@ using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.enemy_s
 {
-    public class EnemyTraps : Enemy
+    public class EnemyBasic : Enemy
     {
         private Vector2 snelheid;
         private Vector2 positieEnemy;
         private Texture2D enemyTexture;
-        Rectangle enemyBox;
-        public EnemyTraps(Texture2D blokTexture)
+        public Rectangle EnemyBox;
+        public bool IsAlive = true;
+        private Vector2 positieEnemyDead;
+
+
+        public EnemyBasic(Texture2D blokTexture, Vector2 positie)
         {
             enemyTexture = blokTexture;
+            positieEnemy = positie;
+            positieEnemyDead = new Vector2(-100, -100);
             snelheid = new Vector2(1, 0);
-            positieEnemy = new Vector2(640, 350);
-            enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
 
 
         public override void Update()
         {
-
-            positieEnemy += snelheid;
-            if (positieEnemy.X > 650 || positieEnemy.X < 580)
+            if (IsAlive)
             {
-                snelheid.X *= -1;
+                positieEnemy += snelheid;
+                if (positieEnemy.X > 650 || positieEnemy.X < 580)
+                {
+                    snelheid.X *= -1;
+                }
+            }
+            else
+            {
+                positieEnemy = positieEnemyDead;
             }
 
-            enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+
+            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(enemyTexture, enemyBox, Color.LightBlue);
+            spriteBatch.Draw(enemyTexture, EnemyBox, Color.LightBlue);
 
         }
     }
