@@ -64,7 +64,13 @@ namespace Project_Game_Dev_2022
             enemys.Add(new EnemyTeleport(_enemyTexture));
 
             //TRAP valstrik
-            enemyTraps.Add(new EnemyTrap(_enemyTexture));
+             Vector2 EnemyLocatie1 = new Vector2(50, 350);
+             Vector2 EnemyLocatie2 = new Vector2(200, 350);
+
+
+            enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie1));
+            enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie2));
+
 
 
         }

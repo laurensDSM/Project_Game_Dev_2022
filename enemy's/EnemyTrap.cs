@@ -15,11 +15,12 @@ namespace Project_Game_Dev_2022.enemy_s
         private Vector2 positieEnemy;
         Texture2D enemyTexture;
         Rectangle enemyBox;
-        public EnemyTrap(Texture2D blokTexture)
+        public EnemyTrap(Texture2D blokTexture, Vector2 positie)
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
-            positieEnemy = new Vector2(50, 350);
+
+            positieEnemy = positie;
             enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
