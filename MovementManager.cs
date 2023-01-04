@@ -28,35 +28,35 @@ namespace Project_Game_Dev_2022
             bool hasCollided = false;
             foreach (var i in Traps)
             {
-                if (toekomstRectangle.Intersects(i))
+                if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
                     hasCollided = true;
                 }
-            }
-
-
-
-
-
-            return hasCollided;
-        }
-        internal bool HasCollidedWithEnemie(Hero hero, Rectangle toekomstRectangle)
-        {
-            bool hasCollided = false;
-            foreach (var i in Enemies)
-            {
-                if (toekomstRectangle.Intersects(i))
+                else
                 {
-                    hasCollided = true;
+                    hasCollided = false;
                 }
             }
 
-
-
-
-
             return hasCollided;
         }
+        //internal bool HasCollidedWithEnemie(Hero hero, Rectangle toekomstRectangle)
+        //{
+        //    bool hasCollided = false;
+        //    foreach (var i in Enemies)
+        //    {
+        //        if (toekomstRectangle.Intersects(i))
+        //        {
+        //            hasCollided = true;
+        //        }
+        //        else
+        //        {
+        //            hasCollided = false;
+        //        }
+        //    }
+
+        //    return hasCollided;
+        //}
 
 
         internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)

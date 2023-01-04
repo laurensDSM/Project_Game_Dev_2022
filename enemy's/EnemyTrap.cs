@@ -14,14 +14,14 @@ namespace Project_Game_Dev_2022.enemy_s
         private Vector2 snelheid;
         private Vector2 positieEnemy;
         Texture2D enemyTexture;
-        Rectangle enemyBox;
+        public Rectangle EnemyBox;
         public EnemyTrap(Texture2D blokTexture, Vector2 positie)
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
 
             positieEnemy = positie;
-            enemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
 
@@ -33,7 +33,7 @@ namespace Project_Game_Dev_2022.enemy_s
         public override void Draw(SpriteBatch spriteBatch)
         {
 
-            spriteBatch.Draw(enemyTexture, enemyBox, Color.Yellow);
+            spriteBatch.Draw(enemyTexture, EnemyBox, Color.Yellow);
 
         }
     }

@@ -26,6 +26,7 @@ namespace Project_Game_Dev_2022
         internal bool canJump;
         internal bool isFalling;
         internal int counter;
+        internal bool collidedWithTrap;
 
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
@@ -47,6 +48,7 @@ namespace Project_Game_Dev_2022
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
             Enemies = enemy;
             Traps = traps;
+            
 
         }
 
@@ -63,12 +65,26 @@ namespace Project_Game_Dev_2022
 
             bool hasCollided = MovementManager.HasCollided(this, toekomstRectangle);
             bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
-            bool hasCollidedWithEnemie= MovementManager.HasCollidedWithEnemie(this, toekomstRectangle);
+           // bool hasCollidedWithEnemie= MovementManager.HasCollidedWithEnemie(this, toekomstRectangle);
             if (!hasCollided)
             {
                 positieHero = toekomstPositie;
 
             }
+            if (hasCollidedWithTrap)
+            {
+                // hero moet dood zijn 
+                // of minder leven 3 levens
+                Debug.Write("Collided with trap");
+                collidedWithTrap = true;
+
+            }
+
+            //if (hasCollidedWithEnemie)
+            //{
+            //    //hero krijgt punten
+            //}
+
 
             
 
@@ -81,7 +97,16 @@ namespace Project_Game_Dev_2022
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(heroTexture, hitBox, Color.Red);
+            if (collidedWithTrap)
+            {
+                spriteBatch.Draw(heroTexture, hitBox, Color.DarkGray);
+
+            }
+            else
+            {
+                spriteBatch.Draw(heroTexture, hitBox, Color.Red);
+
+            }
 
         }
     }
