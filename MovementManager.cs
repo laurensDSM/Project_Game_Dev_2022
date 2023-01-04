@@ -51,8 +51,11 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
-                    hasCollided = true;
-                    i.IsAlive = false; 
+                    if ((toekomstRectangle.Bottom - i.EnemyBox.Top) < 7)
+                    {
+                        hasCollided = true;
+                        i.IsAlive = false;
+                    }
                 }
                 else
                 {
@@ -69,8 +72,13 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
-                    hasCollided = true;
-                    i.IsAlive = false;
+
+                    if ( (toekomstRectangle.Bottom - i.EnemyBox.Top ) < 7)
+                    {
+                        hasCollided = true;
+                         i.IsAlive = false;
+                        Debug.WriteLine("collision");
+                    }
                 }
                 else
                 {

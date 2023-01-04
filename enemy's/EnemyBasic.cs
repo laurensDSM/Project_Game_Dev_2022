@@ -24,7 +24,9 @@ namespace Project_Game_Dev_2022.enemy_s
             enemyTexture = blokTexture;
             positieEnemy = positie;
             positieEnemyDead = new Vector2(-100, -100);
-            snelheid = new Vector2(1, 0);
+            //snelheid = new Vector2(1, 0);
+            snelheid = new Vector2(0, 0);
+
             EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }

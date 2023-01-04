@@ -71,6 +71,7 @@ namespace Project_Game_Dev_2022
 
             }
 
+
             bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
             bool hasCollidedWithEnemieTeleport= MovementManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
             bool hasCollidedWithEnemieBasic = MovementManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);

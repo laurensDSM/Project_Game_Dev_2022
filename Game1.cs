@@ -27,7 +27,6 @@ namespace Project_Game_Dev_2022
 
         Texture2D blokTexture;
 
-      //  enum state { MENU, LEVEL1 , LEVEL2, GAMEOVER}
 
 
 
@@ -64,7 +63,6 @@ namespace Project_Game_Dev_2022
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
 
             //Teleport
-            enemysTeleport.Add(new EnemyTeleport(_enemyTexture));
             enemysTeleport.Add(new EnemyTeleport(_enemyTexture));
 
 
