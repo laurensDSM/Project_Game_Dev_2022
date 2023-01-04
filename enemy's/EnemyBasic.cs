@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.enemy_s
 {
-    public class EnemyBasic : Enemy
+    public class EnemyTraps : Enemy
     {
         private Vector2 snelheid;
         private Vector2 positieEnemy;
         private Texture2D enemyTexture;
         Rectangle enemyBox;
-        public EnemyBasic(Texture2D blokTexture)
+        public EnemyTraps(Texture2D blokTexture)
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);

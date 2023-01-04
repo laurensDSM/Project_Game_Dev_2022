@@ -30,7 +30,7 @@ namespace Project_Game_Dev_2022
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
         public List<Enemy> Enemies;
-        public List<EnemyBasic> EnemyBasics;
+        public List<EnemyTraps> EnemyBasics;
 
 
         public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm)

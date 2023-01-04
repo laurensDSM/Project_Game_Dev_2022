@@ -5,6 +5,7 @@ using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 
 namespace Project_Game_Dev_2022
 {
@@ -13,22 +14,18 @@ namespace Project_Game_Dev_2022
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero;
-        //private Enemy enemy1;
-        //private Enemy enemy2;
-        //private Enemy enemy3;
         private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
 
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
-        // private List<Enemy> enemys = new List<Enemy>();
-
-        private List<EnemyBasic> enemyBasics = new List<EnemyBasic>();
+        private List<Enemy> enemys = new List<Enemy>();
+        private List<EnemyTrap> enemyTraps = new List<EnemyTrap>();
 
 
         Texture2D blokTexture;
 
-        enum state { MENU, LEVEL1}
+      //  enum state { MENU, LEVEL1 , LEVEL2, GAMEOVER}
 
 
 
@@ -52,14 +49,6 @@ namespace Project_Game_Dev_2022
             collideablesLevel1.Add(new Rectangle(640, 400, 10 * 8, 10 * 8));
 
 
-            // enemy meegeven aan list
-
-            //enemys.Add(new EnemyBasic(_enemyTexture));
-            //enemys.Add(new EnemyTeleport(_enemyTexture));
-            //enemys.Add(new EnemyTrap(_enemyTexture));
-
-            enemyBasics.Add(new EnemyBasic(_enemyTexture));
-
 
         }
 
@@ -71,10 +60,11 @@ namespace Project_Game_Dev_2022
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm);
-            //enemy1 = new EnemyBasic(_enemyTexture);
-            //enemy2 = new EnemyTeleport(_enemyTexture);
-            //enemy3 = new EnemyTrap(_enemyTexture);
+            enemys.Add(new EnemyTraps(_enemyTexture));
+            enemys.Add(new EnemyTeleport(_enemyTexture));
 
+            //TRAP valstrik
+            enemyTraps.Add(new EnemyTrap(_enemyTexture));
 
 
         }
@@ -99,15 +89,13 @@ namespace Project_Game_Dev_2022
                 Exit();
         
             hero.Update();
-            //enemy1.Update();
-            //enemy2.Update();
-            //enemy3.Update();
-            //foreach (var i in enemys)
-            //{
-            //    i.Update();
-            //}
 
-            foreach (var i in enemyBasics)
+            foreach (var i in enemys)
+            {
+                i.Update();
+            }
+
+            foreach (var i in enemyTraps)
             {
                 i.Update();
             }
@@ -121,17 +109,15 @@ namespace Project_Game_Dev_2022
             GraphicsDevice.Clear(Color.Navy); // Achtergrond kleur van het scherm
 
             _spriteBatch.Begin();
-            //enemy1.Draw(_spriteBatch);
-            //enemy2.Draw(_spriteBatch);
-            //enemy3.Draw(_spriteBatch);
 
 
-            //foreach (var i in enemys)
-            //{
-            //    i.Draw(_spriteBatch);
-            //}
 
-            foreach (var i in enemyBasics)
+            foreach (var i in enemys)
+            {
+                i.Draw(_spriteBatch);
+            }
+
+            foreach (var i in enemyTraps)
             {
                 i.Draw(_spriteBatch);
             }
