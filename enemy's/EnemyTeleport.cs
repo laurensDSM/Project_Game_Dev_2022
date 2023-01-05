@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Project_Game_Dev_2022.Animation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,9 @@ namespace Project_Game_Dev_2022.enemy_s
 {
     public class EnemyTeleport : Enemy
     {
+
+        Texture2D enemyTexture;
+        Animatie animatie;
         private Vector2 snelheid;
         private Vector2 positieEnemy;
         private Vector2 maximalePositieEnemy;
@@ -19,7 +23,6 @@ namespace Project_Game_Dev_2022.enemy_s
         private Vector2 positieEnemyDead;
 
 
-        Texture2D enemyTexture;
         public Rectangle EnemyBox;
         private int counter;
         DateTime Start = DateTime.Now;
@@ -32,6 +35,15 @@ namespace Project_Game_Dev_2022.enemy_s
             positieEnemy = new Vector2(180, 70);
             positieEnemyDead = new Vector2(-20, -20);
             maximalePositieEnemy = new Vector2(20, 20);
+
+            animatie = new Animatie();
+            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(32, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 0, 32, 32)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(96, 0, 32, 32)));
+
+
+
             EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
@@ -39,7 +51,10 @@ namespace Project_Game_Dev_2022.enemy_s
         {
 
             if (IsAlive) {
-            counter++;
+
+                animatie.Update(gameTime);
+
+                counter++;
             //Debug.Write(counter);
             Random rand = new Random();
             DateTime StartUpdate = DateTime.Now;
@@ -108,7 +123,7 @@ namespace Project_Game_Dev_2022.enemy_s
         {
             if (IsAlive)
             {
-                spriteBatch.Draw(enemyTexture, EnemyBox, Color.Pink);
+                spriteBatch.Draw(enemyTexture, EnemyBox, animatie.CurrentFrame.SourceRectangle, Color.Pink);
 
             }
 

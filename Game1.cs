@@ -18,6 +18,7 @@ namespace Project_Game_Dev_2022
         private Texture2D _heroTexture;
         private Texture2D _trapTexture;
         private Texture2D _moneyTexture;
+        private Texture2D _teleportTexture;
 
 
         private GraphicsDeviceManager _graphics;
@@ -72,24 +73,11 @@ namespace Project_Game_Dev_2022
         {
 
 
-
             base.Initialize();
             
-
-            //Teleport
-            enemysTeleport.Add(new EnemyTeleport(_enemyTexture));
-
-
-
-
-
             //Basic
             Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
             enemyBasic.Add(new EnemyBasic(_enemyTexture, EnemyLocatieBasic1));
-
-
-
-
 
             // Immunity
             Vector2 ImmunityLocatie2 = new Vector2(300, 370);
@@ -108,8 +96,8 @@ namespace Project_Game_Dev_2022
 
 
             //TRAP valstrik
-            Vector2 EnemyLocatie1 = new Vector2(50, 350);
-            Vector2 EnemyLocatie2 = new Vector2(200, 350);
+            Vector2 EnemyLocatie1 = new Vector2(30, 350);
+            Vector2 EnemyLocatie2 = new Vector2(220, 350);
             Vector2 EnemyLocatie3 = new Vector2(400, 350);
 
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
@@ -118,10 +106,13 @@ namespace Project_Game_Dev_2022
 
             //money
             Vector2 MoneyLocatie1 = new Vector2(110, 350);
-            Vector2 MoneyLocatie2 = new Vector2(150, 350);
+            Vector2 MoneyLocatie2 = new Vector2(170, 350);
 
             money.Add(new Money(_moneyTexture, MoneyLocatie1));
             money.Add(new Money(_moneyTexture, MoneyLocatie2));
+
+            //Teleport
+            enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
 
 
         }
@@ -136,7 +127,9 @@ namespace Project_Game_Dev_2022
             _heroTexture = Content.Load<Texture2D>("test");
             _trapTexture = Content.Load<Texture2D>("trap");
             _moneyTexture = Content.Load<Texture2D>("coin");
-                
+            _teleportTexture = Content.Load<Texture2D>("ghost");
+
+
 
 
         }
