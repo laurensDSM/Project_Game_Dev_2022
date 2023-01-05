@@ -11,113 +11,13 @@ namespace Project_Game_Dev_2022
     public class MovementManager
     {
         public List<Rectangle> CollideablesLevel;
-        public List<EnemyTeleport> EnemiesTeleport;
-        public List<EnemyTrap> Traps;
-        public List<EnemyBasic> EnemiesBasic;
-        public List<Money> Money;
 
 
-
-
-
-        public MovementManager(List<Rectangle> collideablesLevel, List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money)
+        public MovementManager(List<Rectangle> collideablesLevel)
         {
             CollideablesLevel = collideablesLevel;
-            EnemiesTeleport = enemyTeleport;
-            Traps = traps;
-            Money = money;
-            EnemiesBasic = enemiesBasic;
-        }
-
-        internal bool HasCollidedWithTrap(Hero hero, Rectangle toekomstRectangle)
-        {
-            bool hasCollided = false;
-            foreach (var i in Traps)
-            {
-
-            
-                if (toekomstRectangle.Intersects(i.EnemyBox))
-                {
-                    hasCollided = true;
-                   // Debug.WriteLine(" colide");
-
-
-                }
-
-            }
-
-            return hasCollided;
-        }
-        internal bool HasCollidedWithEnemieTeleport(Hero hero, Rectangle toekomstRectangle)
-        {
-            bool hasCollided = false;
-            foreach (var i in EnemiesTeleport)
-            {
-                if (toekomstRectangle.Intersects(i.EnemyBox))
-                {
-                    if ((toekomstRectangle.Bottom - i.EnemyBox.Top) < 7)
-                    {
-                        hasCollided = true;
-                        i.IsAlive = false;
-                    }
-                }
-                else
-                {
-                    hasCollided = false;
-                }
-            }
-
-            return hasCollided;
-        }
-        internal bool HasCollidedWithEnemieBasic(Hero hero, Rectangle toekomstRectangle)
-        {
-            bool hasCollided = false;
-            foreach (var i in EnemiesBasic)
-            {
-                if (toekomstRectangle.Intersects(i.EnemyBox))
-                {
-
-                    if ( (toekomstRectangle.Bottom - i.EnemyBox.Top ) < 7)
-                    {
-                        hasCollided = true;
-                         i.IsAlive = false;
-                    }
-                }
-                else
-                {
-                    hasCollided = false;
-                }
-            }
-
-            return hasCollided;
-        }
-
-        internal bool HasCollidedWithMoney(Hero hero, Rectangle toekomstRectangle)
-        {
-            bool hasCollided = false;
-
-            foreach (var i in Money)
-            {
-                if (toekomstRectangle.Intersects(i.MoneyBox))
-                {
-
-                        hasCollided = true;
-                        i.IsUsed = true;
-                    hero.money++;
-                        //Debug.WriteLine("collision");
-                 
-                }
-                else
-                {
-                    hasCollided = false;
-                }
-            }
-
-
-            return hasCollided;
 
         }
-
 
         internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)
         {
@@ -196,19 +96,6 @@ namespace Project_Game_Dev_2022
             }
             return direction;
         }
-
-        
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

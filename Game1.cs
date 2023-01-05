@@ -65,8 +65,9 @@ namespace Project_Game_Dev_2022
 
 
             base.Initialize();
-            MovementManager mm = new MovementManager(collideablesLevel1, enemysTeleport, enemyTraps, enemyBasic, money);
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm);
+            MovementManager mm = new MovementManager(collideablesLevel1);
+            CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money);
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
 
             //Teleport
             enemysTeleport.Add(new EnemyTeleport(_enemyTexture));

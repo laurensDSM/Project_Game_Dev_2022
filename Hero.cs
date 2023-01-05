@@ -36,16 +36,18 @@ namespace Project_Game_Dev_2022
 
         public IInputReader InputReader { get; set; }
         public MovementManager MovementManager { get; set; }
+        public CollisionManager CollisionManager { get; set; }
 
 
 
 
-        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm)
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm , CollisionManager col)
         {
             canJump = true;
             isFalling = true;
             heroTexture = blokTexture;
             MovementManager = mm;
+            CollisionManager = col;
             counter = 0;
             InputReader = inputReader;
             snelheid = new Vector2(5, 5);
@@ -74,10 +76,10 @@ namespace Project_Game_Dev_2022
             }
 
 
-            bool hasCollidedWithTrap = MovementManager.HasCollidedWithTrap(this, toekomstRectangle);
-            bool hasCollidedWithEnemieTeleport= MovementManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
-            bool hasCollidedWithEnemieBasic = MovementManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
-            bool hasCollidedWithMoney = MovementManager.HasCollidedWithMoney(this, toekomstRectangle);
+            bool hasCollidedWithTrap = CollisionManager.HasCollidedWithTrap(this, toekomstRectangle);
+            bool hasCollidedWithEnemieTeleport= CollisionManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
+            bool hasCollidedWithEnemieBasic = CollisionManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
+            bool hasCollidedWithMoney = CollisionManager.HasCollidedWithMoney(this, toekomstRectangle);
 
 
             if (hasCollidedWithTrap)
