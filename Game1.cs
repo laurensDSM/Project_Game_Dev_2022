@@ -19,6 +19,7 @@ namespace Project_Game_Dev_2022
         private Texture2D _trapTexture;
         private Texture2D _moneyTexture;
         private Texture2D _teleportTexture;
+        private Texture2D _enemyBasicTexture;
 
 
         private GraphicsDeviceManager _graphics;
@@ -74,10 +75,6 @@ namespace Project_Game_Dev_2022
 
 
             base.Initialize();
-            
-            //Basic
-            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
-            enemyBasic.Add(new EnemyBasic(_enemyTexture, EnemyLocatieBasic1));
 
             // Immunity
             Vector2 ImmunityLocatie2 = new Vector2(300, 370);
@@ -104,6 +101,13 @@ namespace Project_Game_Dev_2022
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3));
 
+            //Teleport
+            enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
+
+            //Basic
+            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
+            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
+
             //money
             Vector2 MoneyLocatie1 = new Vector2(110, 350);
             Vector2 MoneyLocatie2 = new Vector2(170, 350);
@@ -111,8 +115,6 @@ namespace Project_Game_Dev_2022
             money.Add(new Money(_moneyTexture, MoneyLocatie1));
             money.Add(new Money(_moneyTexture, MoneyLocatie2));
 
-            //Teleport
-            enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
 
 
         }
@@ -128,6 +130,7 @@ namespace Project_Game_Dev_2022
             _trapTexture = Content.Load<Texture2D>("trap");
             _moneyTexture = Content.Load<Texture2D>("coin");
             _teleportTexture = Content.Load<Texture2D>("ghost");
+            _enemyBasicTexture = Content.Load<Texture2D>("EnemyBasic");
 
 
 
