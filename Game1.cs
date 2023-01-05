@@ -5,6 +5,8 @@ using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
+using SharpDX.Direct3D9;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -13,6 +15,9 @@ namespace Project_Game_Dev_2022
 {
     public class Game1 : Game
     {
+        private Texture2D _texture;
+
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero;
@@ -67,9 +72,7 @@ namespace Project_Game_Dev_2022
 
 
             base.Initialize();
-            MovementManager mm = new MovementManager(collideablesLevel1);
-            CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
+            
 
             //Teleport
             enemysTeleport.Add(new EnemyTeleport(_enemyTexture));
@@ -93,9 +96,10 @@ namespace Project_Game_Dev_2022
             //money
             Vector2 MoneyLocatie1 = new Vector2(120, 370);
             Vector2 MoneyLocatie2 = new Vector2(170, 370);
+            Vector2 MoneyLocatie3 = new Vector2(170, 370);
+
 
             money.Add(new Money(_enemyTexture, MoneyLocatie1));
-
             money.Add(new Money(_enemyTexture, MoneyLocatie2));
 
 
@@ -104,7 +108,14 @@ namespace Project_Game_Dev_2022
 
             immunities.Add(new Immunity(_enemyTexture, ImmunityLocatie2));
 
+            InitializeGameObject();
+        }
 
+        private void InitializeGameObject()
+        {
+            MovementManager mm = new MovementManager(collideablesLevel1);
+            CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
+            hero = new Hero(_texture, new KeyboardReader(), mm, col);
         }
 
         protected override void LoadContent()
@@ -114,8 +125,9 @@ namespace Project_Game_Dev_2022
             blokTexture.SetData(new[] { Color.White });
             _heroTexture = blokTexture;
             _enemyTexture = blokTexture;
-            
 
+            _texture = Content.Load<Texture2D>("test");
+                
 
 
         }

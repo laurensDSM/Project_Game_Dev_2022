@@ -19,10 +19,14 @@ namespace Project_Game_Dev_2022
 
     public class Hero : IGameObject
     {
+
+        Texture2D heroTexture;
+        private Rectangle deelRectangle;
+        private int schuifOp_X = 0;
+
         private Vector2 snelheid;
         private Vector2 positieHero;
         Rectangle hitBox;
-        Texture2D heroTexture;
         internal bool canJump;
         internal bool isFalling;
         internal int counter;
@@ -32,6 +36,8 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithMoney;
         internal int money;
         internal int immunity;
+
+
 
 
 
@@ -53,6 +59,9 @@ namespace Project_Game_Dev_2022
             InputReader = inputReader;
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
+
+            deelRectangle = new Rectangle(schuifOp_X, 0, 180, 247);
+
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
 
 
@@ -60,6 +69,18 @@ namespace Project_Game_Dev_2022
 
         public void Update()
         {
+
+
+            schuifOp_X += 180;
+            if (schuifOp_X > 720)
+            {
+                schuifOp_X = 0;
+            }
+            deelRectangle.X = schuifOp_X;
+
+
+
+
             Vector2 direction = InputReader.ReadInput();
 
             direction = MovementManager.Move(this, direction);
@@ -76,7 +97,8 @@ namespace Project_Game_Dev_2022
 
             }
 
-            Debug.WriteLine(immunity);
+
+
             bool hasCollidedWithTrap = CollisionManager.HasCollidedWithTrap(this, toekomstRectangle);
             bool hasCollidedWithEnemieTeleport= CollisionManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
             bool hasCollidedWithEnemieBasic = CollisionManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
@@ -133,14 +155,15 @@ namespace Project_Game_Dev_2022
         {
             if (collidedWithTrap && immunity<=0)
             {
-                spriteBatch.Draw(heroTexture, hitBox, Color.DarkGray);
+                spriteBatch.Draw(heroTexture, hitBox, deelRectangle, Color.White);
                 //Debug.WriteLine(immunity);
+                //Health -1
 
             }
 
             else
             {
-                spriteBatch.Draw(heroTexture, hitBox, Color.Red);
+                spriteBatch.Draw(heroTexture, hitBox,deelRectangle, Color.White);
 
             }
 

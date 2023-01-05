@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Project_Game_Dev_2022.powerups;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Project_Game_Dev_2022
 {
@@ -103,15 +104,18 @@ namespace Project_Game_Dev_2022
         internal bool HasCollidedWithMoney(Hero hero, Rectangle toekomstRectangle)
         {
             bool hasCollided = false;
-
             foreach (var i in Money)
             {
                 if (toekomstRectangle.Intersects(i.MoneyBox))
                 {
+                     
 
                     hasCollided = true;
                     i.IsUsed = true;
-                    hero.money++;
+
+                    hero.money = hero.money + 50;
+                    Debug.WriteLine(hero.money);
+                    
                     //Debug.WriteLine("collision");
 
                 }

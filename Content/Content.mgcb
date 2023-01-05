@@ -13,6 +13,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Adventurer Female Sprite Sheet (1).png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Adventurer Female Sprite Sheet (1).png;hero.png
+
 #begin button-glossy-blue-vector-graphic-pixabay-19.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -24,4 +36,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:button-glossy-blue-vector-graphic-pixabay-19.png;button.png
+
+#begin CharacterSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharacterSheet.png;test.png
 
