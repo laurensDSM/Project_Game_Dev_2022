@@ -31,6 +31,7 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithEnemyBasic;
         internal bool collidedWithMoney;
         internal int money;
+        internal int immunity;
 
 
 
@@ -75,18 +76,19 @@ namespace Project_Game_Dev_2022
 
             }
 
-
+            Debug.WriteLine(immunity);
             bool hasCollidedWithTrap = CollisionManager.HasCollidedWithTrap(this, toekomstRectangle);
             bool hasCollidedWithEnemieTeleport= CollisionManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
             bool hasCollidedWithEnemieBasic = CollisionManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
             bool hasCollidedWithMoney = CollisionManager.HasCollidedWithMoney(this, toekomstRectangle);
+            bool hasCollidedWithImmunity = CollisionManager.HasCollidedWithImmunity(this, toekomstRectangle);
+
 
 
             if (hasCollidedWithTrap)
             {
                 // hero moet dood zijn 
                 // of minder leven 3 levens
-                Debug.WriteLine("Collided with trap");
                 collidedWithTrap = true;
 
             }
@@ -129,9 +131,10 @@ namespace Project_Game_Dev_2022
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (collidedWithTrap || collidedWithEnemyTeleport || collidedWithEnemyBasic)
+            if (collidedWithTrap && immunity<=0)
             {
                 spriteBatch.Draw(heroTexture, hitBox, Color.DarkGray);
+                //Debug.WriteLine(immunity);
 
             }
 

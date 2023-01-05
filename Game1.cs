@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.money;
+using Project_Game_Dev_2022.powerups;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
@@ -26,6 +27,7 @@ namespace Project_Game_Dev_2022
         private List<EnemyTrap> enemyTraps = new List<EnemyTrap>();
         private List<EnemyBasic> enemyBasic = new List<EnemyBasic>();
         private List<Money> money = new List<Money>();
+        private List<Immunity> immunities = new List<Immunity>();
 
 
 
@@ -66,7 +68,7 @@ namespace Project_Game_Dev_2022
 
             base.Initialize();
             MovementManager mm = new MovementManager(collideablesLevel1);
-            CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money);
+            CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
             hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
 
             //Teleport
@@ -97,6 +99,10 @@ namespace Project_Game_Dev_2022
             money.Add(new Money(_enemyTexture, MoneyLocatie2));
 
 
+            // Immunity
+            Vector2 ImmunityLocatie2 = new Vector2(300, 370);
+
+            immunities.Add(new Immunity(_enemyTexture, ImmunityLocatie2));
 
 
         }
@@ -140,6 +146,11 @@ namespace Project_Game_Dev_2022
             {
                 item.Update();
             }
+            foreach (var item in immunities)
+            {
+                item.Update();
+
+            }
             base.Update(gameTime);
 
         }
@@ -166,6 +177,10 @@ namespace Project_Game_Dev_2022
                 i.Draw(_spriteBatch);
             }
             foreach (var item in money)
+            {
+                item.Draw(_spriteBatch);
+            }
+            foreach (var item in immunities)
             {
                 item.Draw(_spriteBatch);
             }

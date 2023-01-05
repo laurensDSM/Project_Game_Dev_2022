@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Project_Game_Dev_2022.powerups;
+using System.Diagnostics;
 
 namespace Project_Game_Dev_2022
 {
@@ -16,17 +18,19 @@ namespace Project_Game_Dev_2022
         public List<EnemyTrap> Traps;
         public List<EnemyBasic> EnemiesBasic;
         public List<Money> Money;
+        public List<Immunity> Immunities;
 
 
 
 
 
-        public CollisionManager( List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money)
+        public CollisionManager( List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money , List<Immunity> immunities)
         {
             EnemiesTeleport = enemyTeleport;
             Traps = traps;
             Money = money;
             EnemiesBasic = enemiesBasic;
+            Immunities = immunities;
         }
 
         internal bool HasCollidedWithTrap(Hero hero, Rectangle toekomstRectangle)
@@ -40,6 +44,10 @@ namespace Project_Game_Dev_2022
                 {
                     hasCollided = true;
                     // Debug.WriteLine(" colide");
+                    if (hero.immunity > 0)
+                    {
+                        hero.immunity--;
+                    }
 
 
                 }
@@ -105,6 +113,32 @@ namespace Project_Game_Dev_2022
                     i.IsUsed = true;
                     hero.money++;
                     //Debug.WriteLine("collision");
+
+                }
+                else
+                {
+                    hasCollided = false;
+                }
+            }
+
+
+            return hasCollided;
+
+        }
+        internal bool HasCollidedWithImmunity(Hero hero, Rectangle toekomstRectangle)
+        {
+            bool hasCollided = false;
+
+            foreach (var i in Immunities)
+            {
+                if (toekomstRectangle.Intersects(i.ImmunityBox))
+                {
+
+                    hasCollided = true;
+                    i.IsUsed = true;
+                   hero.immunity=+50;
+                    //Waarde moet aangepast worden naar gelang je collison hebt met de trap
+                    Debug.WriteLine($"Immunity"+" "+hero.immunity);
 
                 }
                 else
