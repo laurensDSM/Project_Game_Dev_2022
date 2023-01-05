@@ -23,6 +23,8 @@ namespace Project_Game_Dev_2022
         private Hero hero;
         private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
+        private double secondCounter = 0;
+
 
 
         private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
@@ -138,31 +140,34 @@ namespace Project_Game_Dev_2022
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
         
-            hero.Update();
+            hero.Update(gameTime);
 
             foreach (var i in enemysTeleport)
             {
-                i.Update();
+                i.Update( gameTime);
             }
 
             foreach (var i in enemyTraps)
             {
-                i.Update();
+                i.Update( gameTime);
             }
             foreach (var item in enemyBasic)
             {
-                item.Update();
+                item.Update( gameTime);
             }
 
             foreach (var item in money)
             {
-                item.Update();
+                item.Update( gameTime);
             }
             foreach (var item in immunities)
             {
-                item.Update();
+                item.Update( gameTime);
 
             }
+
+
+            
             base.Update(gameTime);
 
         }

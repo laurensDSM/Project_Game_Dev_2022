@@ -28,7 +28,7 @@ namespace Project_Game_Dev_2022.money
 
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             if (IsUsed)
             {

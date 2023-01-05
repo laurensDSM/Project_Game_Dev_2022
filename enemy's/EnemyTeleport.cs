@@ -35,7 +35,7 @@ namespace Project_Game_Dev_2022.enemy_s
             EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
 
             if (IsAlive) {

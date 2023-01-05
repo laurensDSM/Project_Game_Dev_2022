@@ -26,7 +26,7 @@ namespace Project_Game_Dev_2022.enemy_s
 
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
 
 

@@ -15,7 +15,7 @@ namespace Project_Game_Dev_2022
     {
 
 
-        public abstract void Update();
+        public abstract void Update(GameTime gameTime);
 
         public abstract void Draw(SpriteBatch spriteBatch);
 

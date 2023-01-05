@@ -21,8 +21,8 @@ namespace Project_Game_Dev_2022
     {
 
         Texture2D heroTexture;
-        private Rectangle deelRectangle;
-        private int schuifOp_X = 0;
+        Animatie animatie;
+
 
         private Vector2 snelheid;
         private Vector2 positieHero;
@@ -36,6 +36,7 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithMoney;
         internal int money;
         internal int immunity;
+        internal int counterPinky;
 
 
 
@@ -60,25 +61,28 @@ namespace Project_Game_Dev_2022
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
 
-            deelRectangle = new Rectangle(schuifOp_X, 0, 180, 247);
+            animatie = new Animatie();
+            animatie.AddFrame(new AnimationFrame(new Rectangle( 0, 0, 180, 247)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(180, 0, 180, 247)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(360, 0, 180, 247)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(540, 0, 180, 247)));
+
+
+
+
+
 
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
 
 
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
 
 
-            schuifOp_X += 180;
-            if (schuifOp_X > 720)
-            {
-                schuifOp_X = 0;
-            }
-            deelRectangle.X = schuifOp_X;
 
-
+            counterPinky++;
 
 
             Vector2 direction = InputReader.ReadInput();
@@ -143,8 +147,8 @@ namespace Project_Game_Dev_2022
                 collidedWithEnemyBasic = false;
             }
 
-
-
+            animatie.Update(gameTime);
+            
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
 
         }
@@ -155,7 +159,13 @@ namespace Project_Game_Dev_2022
         {
             if (collidedWithTrap && immunity<=0)
             {
-                spriteBatch.Draw(heroTexture, hitBox, deelRectangle, Color.White);
+
+                if (counterPinky % 2 == 0)
+                {
+                    spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.Red);
+                    counter = 0;
+
+                }
                 //Debug.WriteLine(immunity);
                 //Health -1
 
@@ -163,7 +173,7 @@ namespace Project_Game_Dev_2022
 
             else
             {
-                spriteBatch.Draw(heroTexture, hitBox,deelRectangle, Color.White);
+                spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.White);
 
             }
 
