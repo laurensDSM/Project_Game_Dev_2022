@@ -17,6 +17,7 @@ namespace Project_Game_Dev_2022
     {
         private Texture2D _heroTexture;
         private Texture2D _trapTexture;
+        private Texture2D _moneyTexture;
 
 
         private GraphicsDeviceManager _graphics;
@@ -87,14 +88,7 @@ namespace Project_Game_Dev_2022
             enemyBasic.Add(new EnemyBasic(_enemyTexture, EnemyLocatieBasic1));
 
 
-            //money
-            Vector2 MoneyLocatie1 = new Vector2(120, 370);
-            Vector2 MoneyLocatie2 = new Vector2(170, 370);
-            Vector2 MoneyLocatie3 = new Vector2(170, 370);
 
-
-            money.Add(new Money(_enemyTexture, MoneyLocatie1));
-            money.Add(new Money(_enemyTexture, MoneyLocatie2));
 
 
             // Immunity
@@ -122,6 +116,14 @@ namespace Project_Game_Dev_2022
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3));
 
+            //money
+            Vector2 MoneyLocatie1 = new Vector2(110, 350);
+            Vector2 MoneyLocatie2 = new Vector2(150, 350);
+
+            money.Add(new Money(_moneyTexture, MoneyLocatie1));
+            money.Add(new Money(_moneyTexture, MoneyLocatie2));
+
+
         }
 
         protected override void LoadContent()
@@ -133,6 +135,7 @@ namespace Project_Game_Dev_2022
 
             _heroTexture = Content.Load<Texture2D>("test");
             _trapTexture = Content.Load<Texture2D>("trap");
+            _moneyTexture = Content.Load<Texture2D>("coin");
                 
 
 
