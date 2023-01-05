@@ -15,15 +15,14 @@ namespace Project_Game_Dev_2022
 {
     public class Game1 : Game
     {
-        private Texture2D _texture;
+        private Texture2D _heroTexture;
+        private Texture2D _trapTexture;
 
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero;
-        private Texture2D _heroTexture;
         private Texture2D _enemyTexture;
-        private double secondCounter = 0;
 
 
 
@@ -81,14 +80,7 @@ namespace Project_Game_Dev_2022
 
 
 
-            //TRAP valstrik
-            Vector2 EnemyLocatie1 = new Vector2(50, 350);
-             Vector2 EnemyLocatie2 = new Vector2(200, 350);
-             Vector2 EnemyLocatie3 = new Vector2(400, 350);
 
-            enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie1));
-            enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie2));
-            enemyTraps.Add(new EnemyTrap(_enemyTexture, EnemyLocatie3));
 
             //Basic
             Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
@@ -117,7 +109,19 @@ namespace Project_Game_Dev_2022
         {
             MovementManager mm = new MovementManager(collideablesLevel1);
             CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
-            hero = new Hero(_texture, new KeyboardReader(), mm, col);
+           
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
+
+
+            //TRAP valstrik
+            Vector2 EnemyLocatie1 = new Vector2(50, 350);
+            Vector2 EnemyLocatie2 = new Vector2(200, 350);
+            Vector2 EnemyLocatie3 = new Vector2(400, 350);
+
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3));
+
         }
 
         protected override void LoadContent()
@@ -125,10 +129,10 @@ namespace Project_Game_Dev_2022
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             blokTexture = new Texture2D(GraphicsDevice, 1, 1);
             blokTexture.SetData(new[] { Color.White });
-            _heroTexture = blokTexture;
             _enemyTexture = blokTexture;
 
-            _texture = Content.Load<Texture2D>("test");
+            _heroTexture = Content.Load<Texture2D>("test");
+            _trapTexture = Content.Load<Texture2D>("trap");
                 
 
 
