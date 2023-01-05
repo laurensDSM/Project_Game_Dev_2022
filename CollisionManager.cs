@@ -140,7 +140,7 @@ namespace Project_Game_Dev_2022
 
                     hasCollided = true;
                     i.IsUsed = true;
-                   hero.immunity=+50;
+                   hero.immunity = hero.immunity + 50;
                     //Waarde moet aangepast worden naar gelang je collison hebt met de trap
                     Debug.WriteLine($"Immunity"+" "+hero.immunity);
 

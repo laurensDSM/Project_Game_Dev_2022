@@ -20,6 +20,8 @@ namespace Project_Game_Dev_2022
         private Texture2D _moneyTexture;
         private Texture2D _teleportTexture;
         private Texture2D _enemyBasicTexture;
+        private Texture2D _powerupTexture;
+
 
 
         private GraphicsDeviceManager _graphics;
@@ -72,14 +74,7 @@ namespace Project_Game_Dev_2022
 
         protected override void Initialize()
         {
-
-
             base.Initialize();
-
-            // Immunity
-            Vector2 ImmunityLocatie2 = new Vector2(300, 370);
-
-            immunities.Add(new Immunity(_enemyTexture, ImmunityLocatie2));
 
             InitializeGameObject();
         }
@@ -115,6 +110,14 @@ namespace Project_Game_Dev_2022
             money.Add(new Money(_moneyTexture, MoneyLocatie1));
             money.Add(new Money(_moneyTexture, MoneyLocatie2));
 
+            // Immunity
+            Vector2 ImmunityLocatie1 = new Vector2(320, 70);
+            Vector2 ImmunityLocatie2 = new Vector2(300, 350);
+            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1));
+            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2));
+
+
+
 
 
         }
@@ -131,6 +134,7 @@ namespace Project_Game_Dev_2022
             _moneyTexture = Content.Load<Texture2D>("coin");
             _teleportTexture = Content.Load<Texture2D>("ghost");
             _enemyBasicTexture = Content.Load<Texture2D>("EnemyBasic");
+            _powerupTexture = Content.Load<Texture2D>("powerups");
 
 
 
