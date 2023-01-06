@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using TiledSharp;
 
 namespace Project_Game_Dev_2022
 {
@@ -29,9 +30,14 @@ namespace Project_Game_Dev_2022
         private Hero hero;
         private Texture2D _enemyTexture;
 
+        //TILEMAP
+        #region TileMaps
+        private TmxMap map;
+        private TileMapManager tilemapManager;
+        private Texture2D tileset;
+        private List<Rectangle> colliders;
 
-
-        private List<Rectangle> collideablesLevel1 = new List<Rectangle>();
+        #endregion
 
 
         private List<EnemyTeleport> enemysTeleport = new List<EnemyTeleport>();
@@ -52,22 +58,6 @@ namespace Project_Game_Dev_2022
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            collideablesLevel1.Add(new Rectangle(0, 400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(80,400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(160, 400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(0, 120, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(160, 120, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(320, 120, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(270, 260, 10 * 4, 10 * 4));
-            collideablesLevel1.Add(new Rectangle(400,120, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(240, 400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(320, 400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(400, 400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(560, 400, 10 * 8, 10 * 8));
-            collideablesLevel1.Add(new Rectangle(640, 400, 10 * 8, 10 * 8));
-
-
-
 
 
         }
@@ -81,7 +71,8 @@ namespace Project_Game_Dev_2022
 
         private void InitializeGameObject()
         {
-            MovementManager mm = new MovementManager(collideablesLevel1);
+
+            MovementManager mm = new MovementManager(colliders);
             CollisionManager col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
            
             hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
@@ -124,10 +115,30 @@ namespace Project_Game_Dev_2022
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
             blokTexture = new Texture2D(GraphicsDevice, 1, 1);
             blokTexture.SetData(new[] { Color.White });
             _enemyTexture = blokTexture;
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+
+            //tilemap
+            map = new TmxMap("Content/level1.tmx");
+            tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
+            int tileWidth = map.Tilesets[0].TileWidth;
+            int tileHeight = map.Tilesets[0].TileHeight;
+            int tileSetTileWidth = tileset.Width / tileWidth;
+            tilemapManager = new TileMapManager(map,tileset, tileSetTileWidth, tileWidth,tileHeight);
+
+            colliders = new List<Rectangle>();
+            foreach (var item in map.ObjectGroups["CollisionBlocks"].Objects)
+            {
+                if (item.Name=="")
+                {
+                    colliders.Add(new Rectangle((int)item.X, (int)item.Y, (int)item.Width, (int)item.Height));
+                }
+            }
+
+
 
             _heroTexture = Content.Load<Texture2D>("test");
             _trapTexture = Content.Load<Texture2D>("trap");
@@ -146,7 +157,7 @@ namespace Project_Game_Dev_2022
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-        
+
             hero.Update(gameTime);
 
             foreach (var i in enemysTeleport)
@@ -185,6 +196,7 @@ namespace Project_Game_Dev_2022
 
             _spriteBatch.Begin();
 
+            tilemapManager.Draw(_spriteBatch);
 
 
             foreach (var i in enemysTeleport)
@@ -209,10 +221,7 @@ namespace Project_Game_Dev_2022
                 item.Draw(_spriteBatch);
             }
 
-            foreach (var i in collideablesLevel1)
-            {
-                _spriteBatch.Draw(blokTexture, i, Color.Green);
-            }
+
             
 
 
