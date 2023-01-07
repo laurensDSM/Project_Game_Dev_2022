@@ -85,6 +85,13 @@
 /processorParam:TextureFormat=Color
 /build:Dungeon_Tileset.png
 
+#begin font/Ubuntu32.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font/Ubuntu32.spritefont
+
 #begin Hedgehog Sprite Sheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -99,6 +106,9 @@
 
 #begin level1.tmx
 /copy:level1.tmx
+
+#begin menu.tmx
+/copy:menu.tmx
 
 #begin Mimic Sprite Sheet.png
 /importer:TextureImporter

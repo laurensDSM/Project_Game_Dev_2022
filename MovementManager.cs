@@ -1,10 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Project_Game_Dev_2022.enemy_s;
-using Project_Game_Dev_2022.money;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Project_Game_Dev_2022
 {
@@ -46,8 +41,8 @@ namespace Project_Game_Dev_2022
                         hero.counter = 0;
 
                     }
-                   // Debug.WriteLine("hero.canJump = true;");
-                   // Debug.WriteLine($"colide" + hero.counter);
+                    // Debug.WriteLine("hero.canJump = true;");
+                    // Debug.WriteLine($"colide" + hero.counter);
 
                     collided = true;
 
@@ -75,9 +70,9 @@ namespace Project_Game_Dev_2022
                 if (hero.canJump && hero.counter <= 30)  //als canjump waar is dan is hij niet aan het vallen
                 {
                     hero.isFalling = false;
-                  //  Debug.WriteLine("jump");
+                    //  Debug.WriteLine("jump");
                     hero.counter++;
-                  //  Debug.WriteLine(hero.counter);
+                    //  Debug.WriteLine(hero.counter);
 
                 }
                 else  //als canjump nietwaar is dan is hij  aan het vallen

@@ -1,19 +1,13 @@
-﻿using Project_Game_Dev_2022.enemy_s;
+﻿using Microsoft.Xna.Framework;
+using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.money;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Project_Game_Dev_2022.powerups;
+using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.Xna.Framework.Content;
 
 namespace Project_Game_Dev_2022
 {
-    public  class CollisionManager
+    public class CollisionManager
     {
         public List<EnemyTeleport> EnemiesTeleport;
         public List<EnemyTrap> Traps;
@@ -25,7 +19,7 @@ namespace Project_Game_Dev_2022
 
 
 
-        public CollisionManager( List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money , List<Immunity> immunities)
+        public CollisionManager(List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money, List<Immunity> immunities)
         {
             EnemiesTeleport = enemyTeleport;
             Traps = traps;
@@ -108,14 +102,14 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.MoneyBox))
                 {
-                     
+
 
                     hasCollided = true;
                     i.IsUsed = true;
 
                     hero.money = hero.money + 50;
                     Debug.WriteLine(hero.money);
-                    
+
                     //Debug.WriteLine("collision");
 
                 }
@@ -140,9 +134,9 @@ namespace Project_Game_Dev_2022
 
                     hasCollided = true;
                     i.IsUsed = true;
-                   hero.immunity = hero.immunity + 50;
+                    hero.immunity = hero.immunity + 50;
                     //Waarde moet aangepast worden naar gelang je collison hebt met de trap
-                    Debug.WriteLine($"Immunity"+" "+hero.immunity);
+                    Debug.WriteLine($"Immunity" + " " + hero.immunity);
 
                 }
                 else

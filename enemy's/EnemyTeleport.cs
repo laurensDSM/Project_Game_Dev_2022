@@ -2,11 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.enemy_s
 {
@@ -50,66 +45,67 @@ namespace Project_Game_Dev_2022.enemy_s
         public override void Update(GameTime gameTime)
         {
 
-            if (IsAlive) {
+            if (IsAlive)
+            {
 
                 animatie.Update(gameTime);
 
                 counter++;
-            //Debug.Write(counter);
-            Random rand = new Random();
-            DateTime StartUpdate = DateTime.Now;
-            TimeSpan span = (Start - StartUpdate );
-             int tijdsverschil  = (int) span.TotalSeconds;
+                //Debug.Write(counter);
+                Random rand = new Random();
+                DateTime StartUpdate = DateTime.Now;
+                TimeSpan span = (Start - StartUpdate);
+                int tijdsverschil = (int)span.TotalSeconds;
 
-            if (tijdsverschil <=  -10)
-            {
-                //Debug.WriteLine("Ja 10 seconde");
-           
-            int mogelijkePositie = rand.Next(0, 5);
-           // Debug.WriteLine(mogelijkePositie);
-            
-            switch (mogelijkePositie)
-            {
+                if (tijdsverschil <= -10)
+                {
+                    //Debug.WriteLine("Ja 10 seconde");
 
-                case 0:
-                    positieEnemy = new Vector2(10, 70);
-                    counter = 0;
-                         Start = DateTime.Now;
+                    int mogelijkePositie = rand.Next(0, 5);
+                    // Debug.WriteLine(mogelijkePositie);
 
-                        break;
-                case 1:
-                    positieEnemy = new Vector2(300, 350);
-                    counter = 0;
-                         Start = DateTime.Now;
+                    switch (mogelijkePositie)
+                    {
 
-                        break;
-                case 2:
-                    positieEnemy = new Vector2(400, 70);
-                    counter = 0;
-                         Start = DateTime.Now;
+                        case 0:
+                            positieEnemy = new Vector2(10, 70);
+                            counter = 0;
+                            Start = DateTime.Now;
 
-                        break;
-                case 3:
-                    positieEnemy = new Vector2(180, 350);
-                    counter = 0;
-                         Start = DateTime.Now;
+                            break;
+                        case 1:
+                            positieEnemy = new Vector2(300, 350);
+                            counter = 0;
+                            Start = DateTime.Now;
+
+                            break;
+                        case 2:
+                            positieEnemy = new Vector2(400, 70);
+                            counter = 0;
+                            Start = DateTime.Now;
+
+                            break;
+                        case 3:
+                            positieEnemy = new Vector2(180, 350);
+                            counter = 0;
+                            Start = DateTime.Now;
 
 
-                        break;
+                            break;
+                    }
                 }
-            }
 
-            positieEnemy += snelheid;
-            positieRechts = positieEnemy - maximalePositieEnemy;
-            positieLinks = positieEnemy + maximalePositieEnemy;
-          //  Debug.Write($"Rechts" + positieRechts + "links" + positieLinks);
-            if (positieEnemy.X > positieLinks.X || positieEnemy.X < positieRechts.X)
-            {
-                snelheid.X *= -1;
-            }
+                positieEnemy += snelheid;
+                positieRechts = positieEnemy - maximalePositieEnemy;
+                positieLinks = positieEnemy + maximalePositieEnemy;
+                //  Debug.Write($"Rechts" + positieRechts + "links" + positieLinks);
+                if (positieEnemy.X > positieLinks.X || positieEnemy.X < positieRechts.X)
+                {
+                    snelheid.X *= -1;
+                }
 
 
-            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+                EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
             }
             else
             {

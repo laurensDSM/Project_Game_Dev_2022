@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.Animation
 {
@@ -17,13 +13,13 @@ namespace Project_Game_Dev_2022.Animation
 
         public Animatie()
         {
-           frames = new List<AnimationFrame>();
+            frames = new List<AnimationFrame>();
 
         }
         public void AddFrame(AnimationFrame animationFrame)
         {
             frames.Add(animationFrame);
-            CurrentFrame=frames[0];
+            CurrentFrame = frames[0];
         }
         public void Update(GameTime gameTime)
         {

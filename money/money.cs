@@ -2,11 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 using Project_Game_Dev_2022.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.money
 {
@@ -25,7 +20,7 @@ namespace Project_Game_Dev_2022.money
         public Money(Texture2D blokTexture, Vector2 positie)
         {
             moneyTexture = blokTexture;
-            positieMoneyUsed = new Vector2(-100,-100);
+            positieMoneyUsed = new Vector2(-100, -100);
             positieMoney = positie;
 
             animatie = new Animatie();

@@ -1,33 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
-using Project_Game_Dev_2022.interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.powerups
 {
-    public  class Immunity
+    public class Immunity
     {
 
-            Animatie animatie;
-            private Vector2 immunityMoney;
-            private Texture2D immunityTexture;
-            public Rectangle ImmunityBox;
-            private Vector2 positieImmunity;
-            public bool IsUsed = false;
+        Animatie animatie;
+        private Vector2 immunityMoney;
+        private Texture2D immunityTexture;
+        public Rectangle ImmunityBox;
+        private Vector2 positieImmunity;
+        public bool IsUsed = false;
 
 
 
 
         public Immunity(Texture2D blokTexture, Vector2 positie)
-            {
-                immunityTexture = blokTexture;
-                positieImmunity = new Vector2(-100, -100);
-                immunityMoney = positie;
+        {
+            immunityTexture = blokTexture;
+            positieImmunity = new Vector2(-100, -100);
+            immunityMoney = positie;
 
             animatie = new Animatie();
             animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
@@ -39,34 +33,34 @@ namespace Project_Game_Dev_2022.powerups
 
             ImmunityBox = new Rectangle((int)immunityMoney.X, (int)immunityMoney.Y, 10 * 5, 10 * 5);
 
-            }
+        }
 
-            public void Update(GameTime gameTime)
-            {
+        public void Update(GameTime gameTime)
+        {
             animatie.Update(gameTime);
 
             if (IsUsed)
-                {
-                    immunityMoney = positieImmunity;
-                    ImmunityBox = new Rectangle((int)immunityMoney.X, (int)immunityMoney.Y, 10 * 2, 10 * 2);
-
-                }
-            }
-
-            public void Draw(SpriteBatch spriteBatch)
             {
+                immunityMoney = positieImmunity;
+                ImmunityBox = new Rectangle((int)immunityMoney.X, (int)immunityMoney.Y, 10 * 2, 10 * 2);
+
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
             if (!IsUsed)
             {
-                    spriteBatch.Draw(immunityTexture, ImmunityBox, animatie.CurrentFrame.SourceRectangle, Color.Brown);
-
-                }
-
-
-
+                spriteBatch.Draw(immunityTexture, ImmunityBox, animatie.CurrentFrame.SourceRectangle, Color.Brown);
 
             }
 
 
-        
+
+
+        }
+
+
+
     }
 }

@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TiledSharp;
 
 namespace Project_Game_Dev_2022
@@ -17,40 +13,42 @@ namespace Project_Game_Dev_2022
         int tileWidth;
         int tileHeight;
 
-        public TileMapManager( TmxMap _map, Texture2D _tileset,int _tilesetTilesWide, int _tileWidth, int _tileHeight )
+        public TileMapManager(TmxMap _map, Texture2D _tileset, int _tilesetTilesWide, int _tileWidth, int _tileHeight)
         {
-            map = _map; 
+            map = _map;
             tileset = _tileset;
             tilesetTilesWide = _tilesetTilesWide;
             tileWidth = _tileWidth;
-            tileHeight = _tileHeight;   
+            tileHeight = _tileHeight;
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
             for (var i = 0; i < map.Layers.Count; i++)
             {
-                for(var j = 0; j < map.Layers[i].Tiles.Count; j++)
+                for (var j = 0; j < map.Layers[i].Tiles.Count; j++)
                 {
                     int gid = map.Layers[i].Tiles[j].Gid;
-                    if (gid==0)
+                    if (gid == 0)
                     {
                         // do nothing
                     }
                     else
                     {
                         int tileFrame = gid - 1;
-                        int column=tileFrame % tilesetTilesWide;
+                        int column = tileFrame % tilesetTilesWide;
                         int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-                        float x=(j%map.Width)*map.TileWidth;
+                        float x = (j % map.Width) * map.TileWidth;
                         float y = (float)Math.Floor(j / (double)map.Width) * map.TileHeight;
-                        Rectangle tilesetRec = new Rectangle((tileWidth)*column,(tileHeight)*row,tileWidth,tileHeight);
-                        spriteBatch.Draw(tileset, new Rectangle((int)x,(int)y,tileWidth,tileHeight), tilesetRec, Color.White);
+                        Rectangle tilesetRec = new Rectangle((tileWidth) * column, (tileHeight) * row, tileWidth, tileHeight);
+                        spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
 
                     }
                 }
             }
+            spriteBatch.End();
 
 
         }
