@@ -79,16 +79,19 @@ namespace Project_Game_Dev_2022
                 Exit();
 
             KeyboardState keyboardState = Keyboard.GetState();
-            if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.NumPad0) || Menu.Stop == true)
+            if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.NumPad0) || Menu.Stop == true || GameEnd.Stop == true || GameOver.Stop==true)
             {
                 Menu.Stop = false;
+                GameOver.Stop = false;
+                GameEnd.Stop = false;
                 Exit();
 
             }
-            if (keyboardState.IsKeyDown(Keys.NumPad1) || Menu.Start == true || keyboardState.IsKeyDown(Keys.NumPad5))
+            if (keyboardState.IsKeyDown(Keys.NumPad1) || Menu.Start == true || GameEnd.Level1==true || keyboardState.IsKeyDown(Keys.NumPad5))
             {
                 //LEVEL1 START
                 Menu.Start = false;
+                GameEnd.Level1 = false;
                 Debug.WriteLine("Start Level1");
                 Level1Screen();
 
@@ -110,13 +113,16 @@ namespace Project_Game_Dev_2022
 
             }
 
-            else if (keyboardState.IsKeyDown(Keys.NumPad2))
+            else if (keyboardState.IsKeyDown(Keys.NumPad2) || GameEnd.Level2 == true)
             {
+                GameEnd.Level2 = false;
                 Level2Screen();
 
             }
-            else if(keyboardState.IsKeyDown(Keys.NumPad9))
+            else if(keyboardState.IsKeyDown(Keys.NumPad9) || GameEnd.Menu== true || GameOver.Menu==true)
             {
+                GameEnd.Menu = false;
+                GameOver.Menu = false;
                 MenuScreen();
 
             }
