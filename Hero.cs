@@ -37,7 +37,7 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithMoney;
         internal int money;
         internal int immunity = 0;
-        internal int levels = 1;
+        internal int levels = 3;
 
         internal int counterPinky;
 
@@ -63,7 +63,7 @@ namespace Project_Game_Dev_2022
             counter = 0;
             InputReader = inputReader;
             snelheid = new Vector2(5, 5);
-            positieHero = new Vector2(5, 5);
+            positieHero = new Vector2(70, 70);
             Enemies = aantalEnemies;
             
 

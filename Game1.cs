@@ -85,7 +85,7 @@ namespace Project_Game_Dev_2022
                 Exit();
 
             }
-            if (keyboardState.IsKeyDown(Keys.NumPad1) || Menu.Start == true)
+            if (keyboardState.IsKeyDown(Keys.NumPad1) || Menu.Start == true || keyboardState.IsKeyDown(Keys.NumPad5))
             {
                 //LEVEL1 START
                 Menu.Start = false;
@@ -94,24 +94,30 @@ namespace Project_Game_Dev_2022
 
 
             }
-            else if (Level1.Level1Completed)
+            else if (Level1.Level1Completed || Level2.Level2Completed)
             {
-                //HERO LEVEL = 0 == GAMEOVER
                 Level1.Level1Completed = false;
+                Level2.Level2Completed = false;
                 GameEndScreen();
 
             }
-            else if (Level1.Level1GameOver)
+            else if (Level1.Level1GameOver || Level2.Level2GameOver)
             {
-                //HERO WINT DUS GAME END
+                Level1.Level1GameOver = false;
+                Level2.Level2GameOver = false;
+
                 GameOverScreen();
 
             }
 
             else if (keyboardState.IsKeyDown(Keys.NumPad2))
             {
-                //LEVEL2 START
                 Level2Screen();
+
+            }
+            else if(keyboardState.IsKeyDown(Keys.NumPad9))
+            {
+                MenuScreen();
 
             }
 

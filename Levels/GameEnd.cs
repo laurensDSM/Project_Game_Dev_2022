@@ -149,7 +149,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Menu     9", new Vector2(450, 220), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "Menu      [9]", new Vector2(450, 220), Color.Black);
 
             #endregion
 
@@ -165,7 +165,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 1     1", new Vector2(450, 420), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "Level 1     [1]", new Vector2(450, 420), Color.Black);
 
             #endregion
 
@@ -181,7 +181,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 2    2", new Vector2(450, 620), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "Level 2    [2]", new Vector2(450, 620), Color.Black);
 
             #endregion
 
@@ -197,7 +197,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "STOP      0", new Vector2(450, 820), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "STOP      [0]", new Vector2(450, 820), Color.Black);
 
             #endregion
 

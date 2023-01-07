@@ -102,7 +102,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "START     1", new Vector2(450, 220), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "START     [5]", new Vector2(450, 220), Color.Black);
 
             #endregion
 
@@ -118,7 +118,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "STOP      0", new Vector2(450, 420), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "STOP      [0]", new Vector2(450, 420), Color.Black);
 
             #endregion
 

@@ -107,9 +107,6 @@
 #begin level1.tmx
 /copy:level1.tmx
 
-#begin menu.tmx
-/copy:menu.tmx
-
 #begin Mimic Sprite Sheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

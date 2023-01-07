@@ -20,7 +20,7 @@ namespace Project_Game_Dev_2022.Levels
         // bron is https://www.monogameextended.net/docs/features/screen-management/screen-management/
         private new Game1 Game => (Game1)base.Game;
         SpriteFont Ubuntu32;
-        private int counterTest;
+       // private int counterTest;
 
         private Texture2D _heroTexture;
         private Texture2D _trapTexture;
@@ -74,9 +74,9 @@ namespace Project_Game_Dev_2022.Levels
             _livesTexture = Content.Load<Texture2D>("heart");
 
             //TRAP valstrik
-            Vector2 EnemyLocatie1 = new Vector2(30, 350);
-            Vector2 EnemyLocatie2 = new Vector2(220, 350);
-            Vector2 EnemyLocatie3 = new Vector2(400, 350);
+            Vector2 EnemyLocatie1 = new Vector2(60, 430);
+            Vector2 EnemyLocatie2 = new Vector2(220, 300);
+            Vector2 EnemyLocatie3 = new Vector2(230, 685);
 
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
@@ -90,15 +90,27 @@ namespace Project_Game_Dev_2022.Levels
             enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
 
             //money
-            Vector2 MoneyLocatie1 = new Vector2(110, 350);
-            Vector2 MoneyLocatie2 = new Vector2(170, 350);
+            Vector2 MoneyLocatie1 = new Vector2(170, 180);
+            Vector2 MoneyLocatie2 = new Vector2(200, 800);
+            Vector2 MoneyLocatie3 = new Vector2(500, 920);
+            Vector2 MoneyLocatie4 = new Vector2(600, 920);
+            Vector2 MoneyLocatie5 = new Vector2(110, 800);
+
+
+
 
             money.Add(new Money(_moneyTexture, MoneyLocatie1));
             money.Add(new Money(_moneyTexture, MoneyLocatie2));
+            money.Add(new Money(_moneyTexture, MoneyLocatie3));
+            money.Add(new Money(_moneyTexture, MoneyLocatie4));
+            money.Add(new Money(_moneyTexture, MoneyLocatie5));
+
+
+
 
             // Immunity
-            Vector2 ImmunityLocatie1 = new Vector2(320, 70);
-            Vector2 ImmunityLocatie2 = new Vector2(300, 350);
+            Vector2 ImmunityLocatie1 = new Vector2(320, 920);
+            Vector2 ImmunityLocatie2 = new Vector2(350, 300);
             immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1));
             immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2));
 
@@ -199,8 +211,8 @@ namespace Project_Game_Dev_2022.Levels
             Game._spriteBatch.Begin();
 
 
-            tilemapManager.Draw(Game._spriteBatch);
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 1", new Vector2(50, 10), Color.White);
+           tilemapManager.Draw(Game._spriteBatch);
+            Game._spriteBatch.DrawString(Ubuntu32, "Level 1", new Vector2(10, 5), Color.Black);
 
 
             foreach (var i in enemysTeleport)

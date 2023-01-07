@@ -27,7 +27,7 @@ namespace Project_Game_Dev_2022.enemy_s
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
-            positieEnemy = new Vector2(180, 70);
+            positieEnemy = new Vector2(180, 90);
             positieEnemyDead = new Vector2(-20, -20);
             maximalePositieEnemy = new Vector2(20, 20);
 
