@@ -13,6 +13,10 @@ namespace Project_Game_Dev_2022.enemy_s
         private Vector2 snelheid;
         private Vector2 positieEnemy;
         public Rectangle EnemyBox;
+        private Vector2 positieTrapUsed;
+        public bool IsAlive = true;
+
+
 
         public EnemyTrap(Texture2D blokTexture, Vector2 positie)
         {
@@ -24,6 +28,7 @@ namespace Project_Game_Dev_2022.enemy_s
             animatie1.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
             animatie1.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
 
+            positieTrapUsed = new Vector2(-100, -100);
 
             EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
@@ -31,8 +36,17 @@ namespace Project_Game_Dev_2022.enemy_s
 
         public override void Update(GameTime gameTime)
         {
+            if (IsAlive)
+            {
+                animatie1.Update(gameTime);
+            }
+            else
+            {
+                positieEnemy = positieTrapUsed;
+                EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
-            animatie1.Update(gameTime);
+            }
+
 
         }
         public override void Draw(SpriteBatch spriteBatch)

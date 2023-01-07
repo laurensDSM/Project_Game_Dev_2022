@@ -7,7 +7,10 @@ using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
+using Project_Game_Dev_2022.LivesHeart;
+
 using System.Collections.Generic;
+using System.Diagnostics;
 using TiledSharp;
 
 namespace Project_Game_Dev_2022.Levels
@@ -16,6 +19,8 @@ namespace Project_Game_Dev_2022.Levels
     {
         // bron is https://www.monogameextended.net/docs/features/screen-management/screen-management/
         private new Game1 Game => (Game1)base.Game;
+        SpriteFont Ubuntu32;
+        private int counterTest;
 
         private Texture2D _heroTexture;
         private Texture2D _trapTexture;
@@ -23,11 +28,20 @@ namespace Project_Game_Dev_2022.Levels
         private Texture2D _teleportTexture;
         private Texture2D _enemyBasicTexture;
         private Texture2D _powerupTexture;
-
-
+        private Texture2D _livesTexture;
 
         private Hero hero;
-        private Texture2D _enemyTexture;
+        public static bool Level1Completed = false;
+        public static bool Level1GameOver = false;
+
+
+        //lives
+        private Lives lives1;
+        private Lives lives2;
+        private Lives lives3;
+
+
+
 
         #region TileMaps
         private TmxMap map;
@@ -45,38 +59,59 @@ namespace Project_Game_Dev_2022.Levels
         #endregion
 
 
-        Texture2D blokTexture;
 
 
         public Level1(Game game) : base(game) { }
 
         public override void Initialize()
         {
-            base.Initialize();
-            blokTexture = new Texture2D(GraphicsDevice, 1, 1);
-            blokTexture.SetData(new[] { Color.White });
-            _enemyTexture = blokTexture;
             _heroTexture = Content.Load<Texture2D>("test");
             _trapTexture = Content.Load<Texture2D>("trap");
             _moneyTexture = Content.Load<Texture2D>("coin");
             _teleportTexture = Content.Load<Texture2D>("ghost");
             _enemyBasicTexture = Content.Load<Texture2D>("EnemyBasic");
             _powerupTexture = Content.Load<Texture2D>("powerups");
+            _livesTexture = Content.Load<Texture2D>("heart");
+
+            //TRAP valstrik
+            Vector2 EnemyLocatie1 = new Vector2(30, 350);
+            Vector2 EnemyLocatie2 = new Vector2(220, 350);
+            Vector2 EnemyLocatie3 = new Vector2(400, 350);
+
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3));
+
+            //Teleport
+            enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
+
+            //Basic
+            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
+            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
+
+            //money
+            Vector2 MoneyLocatie1 = new Vector2(110, 350);
+            Vector2 MoneyLocatie2 = new Vector2(170, 350);
+
+            money.Add(new Money(_moneyTexture, MoneyLocatie1));
+            money.Add(new Money(_moneyTexture, MoneyLocatie2));
+
+            // Immunity
+            Vector2 ImmunityLocatie1 = new Vector2(320, 70);
+            Vector2 ImmunityLocatie2 = new Vector2(300, 350);
+            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1));
+            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2));
+
+
+            base.Initialize();
+
+
         }
 
 
 
         public override void LoadContent()
         {
-
-
-            var mm = new MovementManager(colliders);
-            var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
-
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
-
-
-
 
 
             //tilemap
@@ -96,12 +131,24 @@ namespace Project_Game_Dev_2022.Levels
                 }
             }
 
+            var mm = new MovementManager(colliders);
+            var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
+
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col,2);
+
+            //lives
+            Vector2 lives1Locatie = new Vector2(900, 10);
+            Vector2 lives2Locatie = new Vector2(850, 10);
+            Vector2 lives3Locatie = new Vector2(800, 10);
+
+
+            lives1 = new Lives(_livesTexture, lives1Locatie);
+            lives2 = new Lives(_livesTexture, lives2Locatie);
+            lives3 = new Lives(_livesTexture, lives3Locatie);
 
 
 
-
-
-
+            Ubuntu32 = Content.Load<SpriteFont>("font/Ubuntu32");
 
 
             base.LoadContent();
@@ -136,16 +183,29 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
+            if (hero.Enemies==0)
+            {
+                Level1Completed = true;
+            }
+
+            if (hero.levels==0)
+            {
+                Level1GameOver = true;
+            }
+
         }
         public override void Draw(GameTime gameTime)
         {
             Game._spriteBatch.Begin();
 
+
             tilemapManager.Draw(Game._spriteBatch);
+            Game._spriteBatch.DrawString(Ubuntu32, "Level 1", new Vector2(50, 10), Color.White);
 
 
             foreach (var i in enemysTeleport)
             {
+
                 i.Draw(Game._spriteBatch);
             }
 
@@ -166,14 +226,26 @@ namespace Project_Game_Dev_2022.Levels
                 item.Draw(Game._spriteBatch);
             }
 
+            switch (hero.levels)
+            {
+                case 1:
+                    lives1.Draw(Game._spriteBatch);
+                        break;
+                case 2:
+                    lives1.Draw(Game._spriteBatch);
+                    lives2.Draw(Game._spriteBatch);
 
+                    break;
+                case 3:
+                    lives1.Draw(Game._spriteBatch);
+                    lives2.Draw(Game._spriteBatch);
+                    lives3.Draw(Game._spriteBatch);
+                    break;
 
-
+            }
 
             hero.Draw(Game._spriteBatch);
-
             Game._spriteBatch.End();
-
 
         }
 

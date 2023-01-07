@@ -18,10 +18,7 @@ namespace Project_Game_Dev_2022
     {
         public SpriteBatch _spriteBatch;
         public GraphicsDeviceManager _graphics;
-
-
         private readonly ScreenManager _screenManager;
-
 
         public Game1()
         {
@@ -45,6 +42,10 @@ namespace Project_Game_Dev_2022
         {
             _screenManager.LoadScreen(new Level1(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
+        private void Level2Screen()
+        {
+            _screenManager.LoadScreen(new Level2(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
         private void GameOverScreen()
         {
             _screenManager.LoadScreen(new GameOver(this), new FadeTransition(GraphicsDevice, Color.Black));
@@ -67,8 +68,8 @@ namespace Project_Game_Dev_2022
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
 
@@ -86,16 +87,34 @@ namespace Project_Game_Dev_2022
             }
             if (keyboardState.IsKeyDown(Keys.NumPad1) || Menu.Start == true)
             {
+                //LEVEL1 START
                 Menu.Start = false;
                 Debug.WriteLine("Start Level1");
-                //Level1Screen();
-                // GameOverScreen();
-                GameEndScreen();
+                Level1Screen();
+
+
             }
-            else if (keyboardState.IsKeyDown(Keys.D2))
+            else if (Level1.Level1Completed)
             {
-               // LoadScreen2();
+                //HERO LEVEL = 0 == GAMEOVER
+                Level1.Level1Completed = false;
+                GameEndScreen();
+
             }
+            else if (Level1.Level1GameOver)
+            {
+                //HERO WINT DUS GAME END
+                GameOverScreen();
+
+            }
+
+            else if (keyboardState.IsKeyDown(Keys.NumPad2))
+            {
+                //LEVEL2 START
+                Level2Screen();
+
+            }
+
 
 
 

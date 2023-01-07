@@ -39,11 +39,19 @@ namespace Project_Game_Dev_2022
                 {
                     hasCollided = true;
                     // Debug.WriteLine(" colide");
-                    if (hero.immunity > 0)
+                    i.IsAlive = false;
+                    Debug.WriteLine($"immunity hero = " + hero.immunity);
+                    if (hero.immunity==0)
+                    {
+
+                        hero.levels--;
+
+                    }
+                    if (hero.immunity>0)
                     {
                         hero.immunity--;
-                    }
 
+                    }
 
                 }
 
@@ -62,6 +70,8 @@ namespace Project_Game_Dev_2022
                     {
                         hasCollided = true;
                         i.IsAlive = false;
+                        hero.Enemies--;
+
                     }
                 }
                 else
@@ -84,6 +94,8 @@ namespace Project_Game_Dev_2022
                     {
                         hasCollided = true;
                         i.IsAlive = false;
+                        hero.Enemies--;
+
                     }
                 }
                 else
@@ -107,7 +119,7 @@ namespace Project_Game_Dev_2022
                     hasCollided = true;
                     i.IsUsed = true;
 
-                    hero.money = hero.money + 50;
+                    hero.money = hero.money + 1;
                     Debug.WriteLine(hero.money);
 
                     //Debug.WriteLine("collision");
@@ -134,7 +146,7 @@ namespace Project_Game_Dev_2022
 
                     hasCollided = true;
                     i.IsUsed = true;
-                    hero.immunity = hero.immunity + 50;
+                    hero.immunity++;
                     //Waarde moet aangepast worden naar gelang je collison hebt met de trap
                     Debug.WriteLine($"Immunity" + " " + hero.immunity);
 

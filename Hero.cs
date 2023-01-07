@@ -26,6 +26,7 @@ namespace Project_Game_Dev_2022
 
         private Vector2 snelheid;
         private Vector2 positieHero;
+        public int Enemies;
         Rectangle hitBox;
         internal bool canJump;
         internal bool isFalling;
@@ -35,7 +36,9 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithEnemyBasic;
         internal bool collidedWithMoney;
         internal int money;
-        internal int immunity;
+        internal int immunity = 0;
+        internal int levels = 1;
+
         internal int counterPinky;
 
 
@@ -49,7 +52,8 @@ namespace Project_Game_Dev_2022
 
 
 
-        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm , CollisionManager col)
+
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm , CollisionManager col, int aantalEnemies )
         {
             canJump = true;
             isFalling = true;
@@ -60,6 +64,8 @@ namespace Project_Game_Dev_2022
             InputReader = inputReader;
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(5, 5);
+            Enemies = aantalEnemies;
+            
 
             animatie = new Animatie();
             animatie.AddFrame(new AnimationFrame(new Rectangle( 0, 0, 180, 247)));
@@ -79,6 +85,7 @@ namespace Project_Game_Dev_2022
 
         public void Update(GameTime gameTime)
         {
+
 
 
 
@@ -148,7 +155,9 @@ namespace Project_Game_Dev_2022
             }
 
             animatie.Update(gameTime);
-            
+
+
+
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
 
         }

@@ -21,11 +21,12 @@ namespace Project_Game_Dev_2022
             tileWidth = _tileWidth;
             tileHeight = _tileHeight;
 
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+            //spriteBatch.Begin();
             for (var i = 0; i < map.Layers.Count; i++)
             {
                 for (var j = 0; j < map.Layers[i].Tiles.Count; j++)
@@ -48,7 +49,7 @@ namespace Project_Game_Dev_2022
                     }
                 }
             }
-            spriteBatch.End();
+            //spriteBatch.End();
 
 
         }
