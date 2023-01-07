@@ -41,10 +41,26 @@ namespace Project_Game_Dev_2022
         {
             _screenManager.LoadScreen(new Menu(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
+        private void Level1Screen()
+        {
+            _screenManager.LoadScreen(new Level1(this), new FadeTransition(GraphicsDevice, Color.Black));
+        }
+        private void GameOverScreen()
+        {
+            _screenManager.LoadScreen(new GameOver(this), new FadeTransition(GraphicsDevice, Color.Black));
+
+        }
+        private void GameEndScreen()
+        {
+            _screenManager.LoadScreen(new GameEnd(this), new FadeTransition(GraphicsDevice, Color.Black));
+
+        }
         protected override void Initialize()
         {
             base.Initialize();
+            // Menu screen is het eerst scherm dat ingeladen zal worden bij de opstart van de game
             MenuScreen();
+
 
         }
 
@@ -72,6 +88,9 @@ namespace Project_Game_Dev_2022
             {
                 Menu.Start = false;
                 Debug.WriteLine("Start Level1");
+                //Level1Screen();
+                // GameOverScreen();
+                GameEndScreen();
             }
             else if (keyboardState.IsKeyDown(Keys.D2))
             {

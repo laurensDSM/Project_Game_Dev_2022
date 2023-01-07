@@ -26,8 +26,6 @@ namespace Project_Game_Dev_2022.Levels
 
 
 
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         private Hero hero;
         private Texture2D _enemyTexture;
 
@@ -55,16 +53,22 @@ namespace Project_Game_Dev_2022.Levels
         public override void Initialize()
         {
             base.Initialize();
+            blokTexture = new Texture2D(GraphicsDevice, 1, 1);
+            blokTexture.SetData(new[] { Color.White });
+            _enemyTexture = blokTexture;
+            _heroTexture = Content.Load<Texture2D>("test");
+            _trapTexture = Content.Load<Texture2D>("trap");
+            _moneyTexture = Content.Load<Texture2D>("coin");
+            _teleportTexture = Content.Load<Texture2D>("ghost");
+            _enemyBasicTexture = Content.Load<Texture2D>("EnemyBasic");
+            _powerupTexture = Content.Load<Texture2D>("powerups");
         }
 
 
 
         public override void LoadContent()
         {
-            blokTexture = new Texture2D(GraphicsDevice, 1, 1);
-            blokTexture.SetData(new[] { Color.White });
-            _enemyTexture = blokTexture;
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
 
             var mm = new MovementManager(colliders);
             var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
@@ -72,34 +76,7 @@ namespace Project_Game_Dev_2022.Levels
             hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
 
 
-            //TRAP valstrik
-            Vector2 EnemyLocatie1 = new Vector2(30, 350);
-            Vector2 EnemyLocatie2 = new Vector2(220, 350);
-            Vector2 EnemyLocatie3 = new Vector2(400, 350);
 
-            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
-            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
-            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3));
-
-            //Teleport
-            enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
-
-            //Basic
-            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
-            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
-
-            //money
-            Vector2 MoneyLocatie1 = new Vector2(110, 350);
-            Vector2 MoneyLocatie2 = new Vector2(170, 350);
-
-            money.Add(new Money(_moneyTexture, MoneyLocatie1));
-            money.Add(new Money(_moneyTexture, MoneyLocatie2));
-
-            // Immunity
-            Vector2 ImmunityLocatie1 = new Vector2(320, 70);
-            Vector2 ImmunityLocatie2 = new Vector2(300, 350);
-            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1));
-            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2));
 
 
             //tilemap
@@ -121,12 +98,7 @@ namespace Project_Game_Dev_2022.Levels
 
 
 
-            _heroTexture = Content.Load<Texture2D>("test");
-            _trapTexture = Content.Load<Texture2D>("trap");
-            _moneyTexture = Content.Load<Texture2D>("coin");
-            _teleportTexture = Content.Load<Texture2D>("ghost");
-            _enemyBasicTexture = Content.Load<Texture2D>("EnemyBasic");
-            _powerupTexture = Content.Load<Texture2D>("powerups");
+
 
 
 
@@ -167,36 +139,41 @@ namespace Project_Game_Dev_2022.Levels
         }
         public override void Draw(GameTime gameTime)
         {
-            tilemapManager.Draw(_spriteBatch);
+            Game._spriteBatch.Begin();
+
+            tilemapManager.Draw(Game._spriteBatch);
 
 
             foreach (var i in enemysTeleport)
             {
-                i.Draw(_spriteBatch);
+                i.Draw(Game._spriteBatch);
             }
 
             foreach (var i in enemyTraps)
             {
-                i.Draw(_spriteBatch);
+                i.Draw(Game._spriteBatch);
             }
             foreach (var i in enemyBasic)
             {
-                i.Draw(_spriteBatch);
+                i.Draw(Game._spriteBatch);
             }
             foreach (var item in money)
             {
-                item.Draw(_spriteBatch);
+                item.Draw(Game._spriteBatch);
             }
             foreach (var item in immunities)
             {
-                item.Draw(_spriteBatch);
+                item.Draw(Game._spriteBatch);
             }
 
 
 
 
 
-            hero.Draw(_spriteBatch);
+            hero.Draw(Game._spriteBatch);
+
+            Game._spriteBatch.End();
+
 
         }
 
