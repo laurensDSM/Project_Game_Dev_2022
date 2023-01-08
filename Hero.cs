@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.Animation;
-using Project_Game_Dev_2022.enemy_s;
+using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.interfaces;
 using SharpDX.MediaFoundation;
@@ -111,80 +111,54 @@ namespace Project_Game_Dev_2022
             bool hasCollidedWithTrap = CollisionManager.HasCollidedWithTrap(this, toekomstRectangle);
             bool hasCollidedWithEnemieTeleport= CollisionManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
             bool hasCollidedWithEnemieBasic = CollisionManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
-            bool hasCollidedWithMoney = CollisionManager.HasCollidedWithMoney(this, toekomstRectangle);
-            bool hasCollidedWithImmunity = CollisionManager.HasCollidedWithImmunity(this, toekomstRectangle);
+            CollisionManager.HasCollidedWithMoney(this, toekomstRectangle);
+            CollisionManager.HasCollidedWithImmunity(this, toekomstRectangle);
 
 
 
             if (hasCollidedWithTrap)
             {
-                // hero moet dood zijn 
-                // of minder leven 3 levens
                 collidedWithTrap = true;
-
             }
             else
             {
                 collidedWithTrap = false;
-
-
             }
-
-
 
             if (hasCollidedWithEnemieTeleport)
             {
                 collidedWithEnemyTeleport = true;
-                //hero krijgt punten
             }
             else
             {
                 collidedWithEnemyTeleport= false;
             }
-
             if (hasCollidedWithEnemieBasic)
             {
                 collidedWithEnemyBasic = true;
-                //hero krijgt punten
             }
             else
             {
                 collidedWithEnemyBasic = false;
             }
-
             animatie.Update(gameTime);
-
-
-
             hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
-
         }
 
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (collidedWithTrap && immunity<=0)
+            if (collidedWithTrap && immunity <= 0)
             {
-
-                if (counterPinky % 2 == 0)
-                {
-                    spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.Red);
-                    counter = 0;
-
-                }
-                //Debug.WriteLine(immunity);
-                //Health -1
 
             }
 
-            else
-            {
-                spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.White);
 
-            }
+
+            spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.White);
+
 
         }
     }
-
 }

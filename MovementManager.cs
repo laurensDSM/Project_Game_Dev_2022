@@ -6,18 +6,13 @@ namespace Project_Game_Dev_2022
     public class MovementManager
     {
         public List<Rectangle> CollideablesLevel;
-
-
         public MovementManager(List<Rectangle> collideablesLevel)
         {
             CollideablesLevel = collideablesLevel;
-
         }
 
         internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)
         {
-
-            bool collided = false;
             foreach (var item in CollideablesLevel)
             {
                 if (toekomstRectangle.Intersects(item))
@@ -26,27 +21,21 @@ namespace Project_Game_Dev_2022
                     {
                         hero.isFalling = true;
                         hero.canJump = false;
-
                     }
                     else
                     {
                         hero.canJump = true;
                         hero.isFalling = false;
                         hero.counter = 0;
-
                     }
-
-                    collided = true;
-
-                    break;
+                    return true; 
                 }
                 else
                 {
                     hero.isFalling = true;
-
                 }
             }
-            return collided;
+            return false;
 
         }
 

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
-using Project_Game_Dev_2022.enemy_s;
+using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.Levels;
 using Project_Game_Dev_2022.money;
@@ -16,8 +16,8 @@ namespace Project_Game_Dev_2022
 {
     public class Game1 : Game
     {
-        public SpriteBatch _spriteBatch;
-        public GraphicsDeviceManager _graphics;
+        public SpriteBatch SpriteBatch;
+        public GraphicsDeviceManager Graphics;
         private readonly ScreenManager _screenManager;
         enum state
         {
@@ -28,10 +28,10 @@ namespace Project_Game_Dev_2022
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            _graphics.PreferredBackBufferWidth = 1000;
-            _graphics.PreferredBackBufferHeight = 1000;
+            Graphics.PreferredBackBufferWidth = 1000;
+            Graphics.PreferredBackBufferHeight = 1000;
            // _graphics.IsFullScreen = false;
 
             IsMouseVisible = true;
@@ -73,7 +73,7 @@ namespace Project_Game_Dev_2022
         protected override void LoadContent()
         {
 
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
 
@@ -110,9 +110,9 @@ namespace Project_Game_Dev_2022
             }
 
 
-            if (Level1.Level1Completed || Level2.Level2Completed)
+            if (Level1.Level_1_Completed || Level2.Level2Completed)
             {
-                Level1.Level1Completed = false;
+                Level1.Level_1_Completed = false;
                 Level2.Level2Completed = false;
                 theState = state.GameEnd;
 

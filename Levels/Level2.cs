@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
-using Project_Game_Dev_2022.enemy_s;
+using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
@@ -209,56 +209,58 @@ namespace Project_Game_Dev_2022.Levels
         }
         public override void Draw(GameTime gameTime)
         {
-            Game._spriteBatch.Begin();
+            Game.SpriteBatch.Begin();
 
 
-            tilemapManager.Draw(Game._spriteBatch);
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 2", new Vector2(10, 5), Color.Black);
+            tilemapManager.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.DrawString(Ubuntu32, $"$" + Wallet.Instance.Value, new Vector2(500, 5), Color.Gold);
+
+            Game.SpriteBatch.DrawString(Ubuntu32, "Level 2", new Vector2(10, 5), Color.Black);
 
 
             foreach (var i in enemysTeleport)
             {
 
-                i.Draw(Game._spriteBatch);
+                i.Draw(Game.SpriteBatch);
             }
 
             foreach (var i in enemyTraps)
             {
-                i.Draw(Game._spriteBatch);
+                i.Draw(Game.SpriteBatch);
             }
             foreach (var i in enemyBasic)
             {
-                i.Draw(Game._spriteBatch);
+                i.Draw(Game.SpriteBatch);
             }
             foreach (var item in money)
             {
-                item.Draw(Game._spriteBatch);
+                item.Draw(Game.SpriteBatch);
             }
             foreach (var item in immunities)
             {
-                item.Draw(Game._spriteBatch);
+                item.Draw(Game.SpriteBatch);
             }
 
             switch (hero.levels)
             {
                 case 1:
-                    lives1.Draw(Game._spriteBatch);
+                    lives1.Draw(Game.SpriteBatch);
                     break;
                 case 2:
-                    lives1.Draw(Game._spriteBatch);
-                    lives2.Draw(Game._spriteBatch);
+                    lives1.Draw(Game.SpriteBatch);
+                    lives2.Draw(Game.SpriteBatch);
 
                     break;
                 case 3:
-                    lives1.Draw(Game._spriteBatch);
-                    lives2.Draw(Game._spriteBatch);
-                    lives3.Draw(Game._spriteBatch);
+                    lives1.Draw(Game.SpriteBatch);
+                    lives2.Draw(Game.SpriteBatch);
+                    lives3.Draw(Game.SpriteBatch);
                     break;
 
             }
 
-            hero.Draw(Game._spriteBatch);
-            Game._spriteBatch.End();
+            hero.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.End();
 
         }
 

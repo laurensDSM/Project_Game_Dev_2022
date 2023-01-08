@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 using System;
 
-namespace Project_Game_Dev_2022.enemy_s
+namespace Project_Game_Dev_2022.enemies
 {
     public class EnemyTeleport : Enemy
     {

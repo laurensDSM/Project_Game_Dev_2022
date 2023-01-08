@@ -145,75 +145,75 @@ namespace Project_Game_Dev_2022.Levels
         public override void Draw(GameTime gameTime)
         {
 
-            Game._spriteBatch.Begin();
-            tilemapManager.Draw(Game._spriteBatch);
+            Game.SpriteBatch.Begin();
+            tilemapManager.Draw(Game.SpriteBatch);
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Bravo u heeft iedereen gedood", new Vector2(150, 100), Color.White);
+            Game.SpriteBatch.DrawString(Ubuntu32, "Bravo u heeft iedereen gedood", new Vector2(150, 100), Color.White);
             #region MenuDraw
             if (hoverMenu)
             {
-                Game._spriteBatch.Draw(blokTexture, menu, Color.LightGreen);
+                Game.SpriteBatch.Draw(blokTexture, menu, Color.LightGreen);
 
             }
             else
             {
-                Game._spriteBatch.Draw(blokTexture, menu, Color.Green);
+                Game.SpriteBatch.Draw(blokTexture, menu, Color.Green);
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Menu      [9]", new Vector2(450, 220), Color.Black);
+            Game.SpriteBatch.DrawString(Ubuntu32, "Menu      [9]", new Vector2(450, 220), Color.Black);
 
             #endregion
 
             #region Levell1Draw
             if (hoverLevel1)
             {
-                Game._spriteBatch.Draw(blokTexture, level1, Color.LightYellow);
+                Game.SpriteBatch.Draw(blokTexture, level1, Color.LightYellow);
 
             }
             else
             {
-                Game._spriteBatch.Draw(blokTexture, level1, Color.Yellow);
+                Game.SpriteBatch.Draw(blokTexture, level1, Color.Yellow);
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 1     [1]", new Vector2(450, 420), Color.Black);
+            Game.SpriteBatch.DrawString(Ubuntu32, "Level 1     [1]", new Vector2(450, 420), Color.Black);
 
             #endregion
 
             #region Level2Draw
             if (hoverLevel2)
             {
-                Game._spriteBatch.Draw(blokTexture, level2, Color.LightYellow);
+                Game.SpriteBatch.Draw(blokTexture, level2, Color.LightYellow);
 
             }
             else
             {
-                Game._spriteBatch.Draw(blokTexture, level2, Color.Yellow);
+                Game.SpriteBatch.Draw(blokTexture, level2, Color.Yellow);
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 2    [2]", new Vector2(450, 620), Color.Black);
+            Game.SpriteBatch.DrawString(Ubuntu32, "Level 2    [2]", new Vector2(450, 620), Color.Black);
 
             #endregion
 
             #region StopDraw
             if (hoverStop)
             {
-                Game._spriteBatch.Draw(blokTexture, stop, Color.LightSalmon);
+                Game.SpriteBatch.Draw(blokTexture, stop, Color.LightSalmon);
 
             }
             else
             {
-                Game._spriteBatch.Draw(blokTexture, stop, Color.Red);
+                Game.SpriteBatch.Draw(blokTexture, stop, Color.Red);
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "STOP      [0]", new Vector2(450, 820), Color.Black);
+            Game.SpriteBatch.DrawString(Ubuntu32, "STOP      [0]", new Vector2(450, 820), Color.Black);
 
             #endregion
 
-            Game._spriteBatch.End();
+            Game.SpriteBatch.End();
 
 
 

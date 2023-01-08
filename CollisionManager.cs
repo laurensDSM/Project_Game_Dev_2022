@@ -1,10 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Project_Game_Dev_2022.enemy_s;
+using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Levels;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Project_Game_Dev_2022
 {
@@ -16,10 +15,6 @@ namespace Project_Game_Dev_2022
         public List<Money> Money;
         public List<Immunity> Immunities;
         private LevelBase level;
-
-
-
-
 
         public CollisionManager(List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money, List<Immunity> immunities, LevelBase level)
         {
@@ -36,21 +31,17 @@ namespace Project_Game_Dev_2022
             bool hasCollided = false;
             foreach (var i in Traps)
             {
-
-
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
                     hasCollided = true;
-                    // Debug.WriteLine(" colide");
                     i.IsAlive = false;
-                    Debug.WriteLine($"immunity hero = " + hero.immunity);
-                    if (hero.immunity==0)
+                    if (hero.immunity == 0)
                     {
 
                         hero.levels--;
 
                     }
-                    if (hero.immunity>0)
+                    if (hero.immunity > 0)
                     {
                         hero.immunity--;
 
@@ -117,26 +108,16 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.MoneyBox))
                 {
-
-
                     hasCollided = true;
                     i.IsUsed = true;
-
                     hero.money = hero.money + 1;
-                    Wallet.Instance.Value = +5;
-                    Debug.WriteLine(Wallet.Instance.Value);
-
-
-                    //Debug.WriteLine("collision");
-
+                    Wallet.Instance.Value = Wallet.Instance.Value + 5;
                 }
                 else
                 {
                     hasCollided = false;
                 }
             }
-
-
             return hasCollided;
 
         }
@@ -152,21 +133,13 @@ namespace Project_Game_Dev_2022
                     hasCollided = true;
                     i.IsUsed = true;
                     hero.immunity++;
-                    //Waarde moet aangepast worden naar gelang je collison hebt met de trap
-                    Debug.WriteLine($"Immunity" + " " + hero.immunity);
-
                 }
                 else
                 {
                     hasCollided = false;
                 }
             }
-
-
             return hasCollided;
-
         }
-
-
     }
 }

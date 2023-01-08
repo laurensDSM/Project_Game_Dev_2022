@@ -96,43 +96,43 @@ namespace Project_Game_Dev_2022.Levels
         public override void Draw(GameTime gameTime)
         {
 
-            Game._spriteBatch.Begin();
-            tilemapManager.Draw(Game._spriteBatch);
+            Game.SpriteBatch.Begin();
+            tilemapManager.Draw(Game.SpriteBatch);
 
-            Game._spriteBatch.DrawString(Ubuntu32, "WELKOM BIJ HET SPEL VAN LAURENS", new Vector2(150, 100), Color.White);
+            Game.SpriteBatch.DrawString(Ubuntu32, "WELKOM BIJ HET SPEL VAN LAURENS", new Vector2(150, 100), Color.White);
             #region StartDraw
             if (hoverStart)
             {
-                Game._spriteBatch.Draw(blokTexture, start, Color.LightGreen);
+                Game.SpriteBatch.Draw(blokTexture, start, Color.LightGreen);
 
             }
             else
             {
-                Game._spriteBatch.Draw(blokTexture, start, Color.Green);
+                Game.SpriteBatch.Draw(blokTexture, start, Color.Green);
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "START     [5]", new Vector2(450, 220), Color.Black);
+            Game.SpriteBatch.DrawString(Ubuntu32, "START     [5]", new Vector2(450, 220), Color.Black);
 
             #endregion
 
             #region StopDraw
             if (hoverStop)
             {
-                Game._spriteBatch.Draw(blokTexture, stop, Color.LightSalmon);
+                Game.SpriteBatch.Draw(blokTexture, stop, Color.LightSalmon);
 
             }
             else
             {
-                Game._spriteBatch.Draw(blokTexture, stop, Color.Red);
+                Game.SpriteBatch.Draw(blokTexture, stop, Color.Red);
 
             }
 
-            Game._spriteBatch.DrawString(Ubuntu32, "STOP      [0]", new Vector2(450, 420), Color.Black);
+            Game.SpriteBatch.DrawString(Ubuntu32, "STOP      [0]", new Vector2(450, 420), Color.Black);
 
             #endregion
 
-            Game._spriteBatch.End();
+            Game.SpriteBatch.End();
 
         }
 

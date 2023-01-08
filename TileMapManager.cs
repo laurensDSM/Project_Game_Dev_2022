@@ -20,23 +20,16 @@ namespace Project_Game_Dev_2022
             tilesetTilesWide = _tilesetTilesWide;
             tileWidth = _tileWidth;
             tileHeight = _tileHeight;
-
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Begin();
             for (var i = 0; i < map.Layers.Count; i++)
             {
                 for (var j = 0; j < map.Layers[i].Tiles.Count; j++)
                 {
                     int gid = map.Layers[i].Tiles[j].Gid;
-                    if (gid == 0)
-                    {
-                        // do nothing
-                    }
-                    else
+                    if (gid != 0)
                     {
                         int tileFrame = gid - 1;
                         int column = tileFrame % tilesetTilesWide;
@@ -45,14 +38,9 @@ namespace Project_Game_Dev_2022
                         float y = (float)Math.Floor(j / (double)map.Width) * map.TileHeight;
                         Rectangle tilesetRec = new Rectangle((tileWidth) * column, (tileHeight) * row, tileWidth, tileHeight);
                         spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
-
                     }
                 }
             }
-            //spriteBatch.End();
-
-
         }
-
     }
 }
