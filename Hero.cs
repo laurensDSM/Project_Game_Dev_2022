@@ -1,17 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Project_Game_Dev_2022.Animation;
-using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.interfaces;
-using SharpDX.MediaFoundation;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Project_Game_Dev_2022
 {
@@ -34,11 +28,14 @@ namespace Project_Game_Dev_2022
         internal bool collidedWithEnemyTeleport;
         internal bool collidedWithEnemyBasic;
         internal bool collidedWithMoney;
+        internal bool invisible;
         internal int money;
         internal int immunity = 0;
         internal int levels = 3;
+        internal int counterInv;
 
         internal int counterPinky;
+        DateTime Start = DateTime.Now;
 
 
 
@@ -52,7 +49,7 @@ namespace Project_Game_Dev_2022
 
 
 
-        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm , CollisionManager col)
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm, CollisionManager col)
         {
             canJump = true;
             isFalling = true;
@@ -63,10 +60,10 @@ namespace Project_Game_Dev_2022
             InputReader = inputReader;
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(70, 70);
-            
+
 
             animatie = new Animatie();
-            animatie.AddFrame(new AnimationFrame(new Rectangle( 0, 0, 180, 247)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 180, 247)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(180, 0, 180, 247)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(360, 0, 180, 247)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(540, 0, 180, 247)));
@@ -88,8 +85,6 @@ namespace Project_Game_Dev_2022
 
 
             counterPinky++;
-
-
             Vector2 direction = InputReader.ReadInput();
 
             direction = MovementManager.Move(this, direction);
@@ -109,7 +104,7 @@ namespace Project_Game_Dev_2022
 
 
             bool hasCollidedWithTrap = CollisionManager.HasCollidedWithTrap(this, toekomstRectangle);
-            bool hasCollidedWithEnemieTeleport= CollisionManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
+            bool hasCollidedWithEnemieTeleport = CollisionManager.HasCollidedWithEnemieTeleport(this, toekomstRectangle);
             bool hasCollidedWithEnemieBasic = CollisionManager.HasCollidedWithEnemieBasic(this, toekomstRectangle);
             CollisionManager.HasCollidedWithMoney(this, toekomstRectangle);
             CollisionManager.HasCollidedWithImmunity(this, toekomstRectangle);
@@ -131,7 +126,7 @@ namespace Project_Game_Dev_2022
             }
             else
             {
-                collidedWithEnemyTeleport= false;
+                collidedWithEnemyTeleport = false;
             }
             if (hasCollidedWithEnemieBasic)
             {
@@ -141,22 +136,50 @@ namespace Project_Game_Dev_2022
             {
                 collidedWithEnemyBasic = false;
             }
+
+            if (invisible)
+            {
+                counterInv++;
+                if (counterInv >= 100)
+                {
+                    counterInv = 0;
+                    invisible = false;
+                }
+            }
+
+
+
+
+
+
             animatie.Update(gameTime);
-            hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
+            hitBox = new Rectangle((int)positieHero.X-3, (int)positieHero.Y-3, 10 * 5, 10 * 5);
         }
 
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (collidedWithTrap && immunity <= 0)
+
+
+            if (immunity <= 0 && collidedWithTrap)
             {
+                invisible = true;
+            }
+
+            if (invisible)
+            {
+                spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.Red);
+
+            }
+            else
+            {
+                spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.White);
 
             }
 
 
 
-            spriteBatch.Draw(heroTexture, hitBox, animatie.CurrentFrame.SourceRectangle, Color.White);
 
 
         }
