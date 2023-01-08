@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 
@@ -15,10 +16,11 @@ namespace Project_Game_Dev_2022.enemies
         public Rectangle EnemyBox;
         private Vector2 positieTrapUsed;
         public bool IsAlive = true;
+        SoundEffect effect;
 
 
 
-        public EnemyTrap(Texture2D blokTexture, Vector2 positie)
+        public EnemyTrap(Texture2D blokTexture, Vector2 positie, SoundEffect effect)
         {
             trapTexture = blokTexture;
             snelheid = new Vector2(1, 0);
@@ -29,6 +31,7 @@ namespace Project_Game_Dev_2022.enemies
             animatie1.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
 
             positieTrapUsed = new Vector2(-100, -100);
+            this.effect = effect;
 
             EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
@@ -42,8 +45,10 @@ namespace Project_Game_Dev_2022.enemies
             }
             else
             {
+                effect.Play();
                 positieEnemy = positieTrapUsed;
                 EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
+                IsAlive = true;
 
             }
 

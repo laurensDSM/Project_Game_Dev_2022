@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 
@@ -14,14 +15,15 @@ namespace Project_Game_Dev_2022.powerups
         private Vector2 positieImmunity;
         public bool IsUsed = false;
 
+        SoundEffect effect;
 
 
-
-        public Immunity(Texture2D blokTexture, Vector2 positie)
+        public Immunity(Texture2D blokTexture, Vector2 positie, SoundEffect effect)
         {
             immunityTexture = blokTexture;
             positieImmunity = new Vector2(-100, -100);
             immunityMoney = positie;
+            this.effect = effect;
 
             animatie = new Animatie();
             animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
@@ -41,9 +43,10 @@ namespace Project_Game_Dev_2022.powerups
 
             if (IsUsed)
             {
+                effect.Play();
                 immunityMoney = positieImmunity;
                 ImmunityBox = new Rectangle((int)immunityMoney.X, (int)immunityMoney.Y, 10 * 2, 10 * 2);
-
+                IsUsed = false;
             }
         }
 

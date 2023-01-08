@@ -122,8 +122,29 @@
 /processorParam:TextureFormat=Color
 /build:Mimic Sprite Sheet.png;powerups.png
 
+#begin mixkit-arcade-bonus-alert-767.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:mixkit-arcade-bonus-alert-767.wav;immunitySound.wav
+
+#begin mixkit-casino-reward-1980.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:mixkit-casino-reward-1980.wav;trapSound.wav
+
 #begin mixkit-magical-coin-win-1936.wav
-/copy:mixkit-magical-coin-win-1936.wav;moneySound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:mixkit-magical-coin-win-1936.wav;moneySound.wav
+
+#begin mixkit-winning-swoosh-2017.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:mixkit-winning-swoosh-2017.wav;enemieSound.wav
 
 #begin Pixel Heart Sprite Sheet 32x32.png
 /importer:TextureImporter

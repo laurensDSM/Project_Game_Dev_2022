@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Levels;
 using Project_Game_Dev_2022.money;
@@ -15,7 +17,6 @@ namespace Project_Game_Dev_2022
         public List<Money> Money;
         public List<Immunity> Immunities;
         private LevelBase level;
-
         public CollisionManager(List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money, List<Immunity> immunities, LevelBase level)
         {
             EnemiesTeleport = enemyTeleport;

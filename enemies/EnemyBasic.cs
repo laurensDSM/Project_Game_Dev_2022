@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 
@@ -15,10 +16,10 @@ namespace Project_Game_Dev_2022.enemies
         public Rectangle EnemyBox;
         public bool IsAlive = true;
         private Vector2 positieEnemyDead;
-
+        SoundEffect effect;
         public SpriteEffects effects;
 
-        public EnemyBasic(Texture2D blokTexture, Vector2 positie)
+        public EnemyBasic(Texture2D blokTexture, Vector2 positie, SoundEffect effect)
         {
             enemyTexture = blokTexture;
             positieEnemy = positie;
@@ -26,7 +27,7 @@ namespace Project_Game_Dev_2022.enemies
             positieEnemyDead = new Vector2(-100, -100);
             snelheid = new Vector2(1, 0);
             effects = SpriteEffects.None;
-
+            this.effect = effect;
             animatie.AddFrame(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
@@ -51,8 +52,9 @@ namespace Project_Game_Dev_2022.enemies
             }
             else
             {
+                effect.Play();
                 positieEnemy = positieEnemyDead;
-                effects = SpriteEffects.None;
+                IsAlive = true;
 
             }
 

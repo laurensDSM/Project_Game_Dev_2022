@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 using System;
@@ -9,7 +10,6 @@ namespace Project_Game_Dev_2022.enemies
     {
 
         Texture2D enemyTexture;
-        Animatie animatie;
         private Vector2 snelheid;
         private Vector2 positieEnemy;
         private Vector2 maximalePositieEnemy;
@@ -17,19 +17,21 @@ namespace Project_Game_Dev_2022.enemies
         private Vector2 positieLinks;
         private Vector2 positieEnemyDead;
 
-
+        private int  play;
         public Rectangle EnemyBox;
         private int counter;
         DateTime Start = DateTime.Now;
         public bool IsAlive = true;
+        SoundEffect effect;
 
-        public EnemyTeleport(Texture2D blokTexture)
+        public EnemyTeleport(Texture2D blokTexture, SoundEffect effect)
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
             positieEnemy = new Vector2(200, 190);
             positieEnemyDead = new Vector2(-20, -20);
             maximalePositieEnemy = new Vector2(20, 20);
+            this.effect = effect;
 
             animatie = new Animatie();
             animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 32, 32)));
@@ -111,9 +113,15 @@ namespace Project_Game_Dev_2022.enemies
             }
             else
             {
+                play++;
+                if (play==1)
+                {
+                    effect.Play();
+
+                }
                 positieEnemy = positieEnemyDead;
+                EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
             }
-            EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
 

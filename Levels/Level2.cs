@@ -12,6 +12,7 @@ using Project_Game_Dev_2022.LivesHeart;
 using System.Collections.Generic;
 using System.Diagnostics;
 using TiledSharp;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Project_Game_Dev_2022.Levels
 {
@@ -33,6 +34,14 @@ namespace Project_Game_Dev_2022.Levels
         private Texture2D _enemyBasicTexture;
         private Texture2D _powerupTexture;
         private Texture2D _livesTexture;
+
+        SoundEffect _soundMoney;
+        SoundEffect _soundTrap;
+        SoundEffect _soundImmunity;
+        SoundEffect _soundEnemie;
+
+
+
 
         private Hero hero;
         public static bool Level2Completed = false;
@@ -78,24 +87,29 @@ namespace Project_Game_Dev_2022.Levels
             _powerupTexture = Content.Load<Texture2D>("powerups");
             _livesTexture = Content.Load<Texture2D>("heart");
 
+            _soundMoney = Content.Load<SoundEffect>("moneySound");
+            _soundTrap = Content.Load<SoundEffect>("trapSound");
+            _soundImmunity = Content.Load<SoundEffect>("immunitySound");
+            _soundEnemie = Content.Load<SoundEffect>("enemieSound");
+
             //TRAP valstrik
             Vector2 EnemyLocatie1 = new Vector2(60, 430);
             Vector2 EnemyLocatie2 = new Vector2(220, 925);
             Vector2 EnemyLocatie3 = new Vector2(400, 800);
 
-            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
-            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
-            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3));
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1, _soundTrap)) ;
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2, _soundTrap));
+            enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie3, _soundTrap));
 
             //Teleport
-            enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
+            enemysTeleport.Add(new EnemyTeleport(_teleportTexture, _soundEnemie));
 
             //Basic
             Vector2 EnemyLocatieBasic1 = new Vector2(570, 430);
             Vector2 EnemyLocatieBasic2 = new Vector2(270, 690);
 
-            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
-            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic2));
+            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1, _soundEnemie));
+            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic2, _soundEnemie));
 
 
             //money
@@ -104,16 +118,16 @@ namespace Project_Game_Dev_2022.Levels
             Vector2 MoneyLocatie3 = new Vector2(800, 640);
 
 
-            money.Add(new Money(_moneyTexture, MoneyLocatie1));
-            money.Add(new Money(_moneyTexture, MoneyLocatie2));
-            money.Add(new Money(_moneyTexture, MoneyLocatie3));
+            money.Add(new Money(_moneyTexture, MoneyLocatie1, _soundMoney));
+            money.Add(new Money(_moneyTexture, MoneyLocatie2, _soundMoney));
+            money.Add(new Money(_moneyTexture, MoneyLocatie3, _soundMoney));
 
 
             // Immunity
             Vector2 ImmunityLocatie1 = new Vector2(910, 430);
             Vector2 ImmunityLocatie2 = new Vector2(910, 800);
-            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1));
-            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2));
+            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1,_soundImmunity));
+            immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2, _soundImmunity));
 
 
             base.Initialize();

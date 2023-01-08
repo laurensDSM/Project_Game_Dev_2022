@@ -153,7 +153,7 @@ namespace Project_Game_Dev_2022
 
 
             animatie.Update(gameTime);
-            hitBox = new Rectangle((int)positieHero.X-3, (int)positieHero.Y-3, 10 * 5, 10 * 5);
+            hitBox = new Rectangle((int)positieHero.X, (int)positieHero.Y, 10 * 5, 10 * 5);
         }
 
 
