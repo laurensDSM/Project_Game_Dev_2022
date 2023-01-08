@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Project_Game_Dev_2022.HeroMap;
 
-namespace Project_Game_Dev_2022
+namespace Project_Game_Dev_2022.Managers
 {
     public class MovementManager
     {
@@ -27,7 +28,7 @@ namespace Project_Game_Dev_2022
                         hero.isFalling = false;
                         hero.counter = 0;
                     }
-                    return true; 
+                    return true;
                 }
                 else
                 {
@@ -45,7 +46,7 @@ namespace Project_Game_Dev_2022
                     hero.isFalling = false;
                     hero.counter++;
                 }
-                else  
+                else
                 {
                     hero.isFalling = true;
                 }

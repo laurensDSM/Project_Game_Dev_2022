@@ -3,11 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.interfaces;
+using Project_Game_Dev_2022.Managers;
 
-namespace Project_Game_Dev_2022
+namespace Project_Game_Dev_2022.HeroMap
 {
-
-
     public class Hero : IGameObject
     {
         Texture2D heroTexture;

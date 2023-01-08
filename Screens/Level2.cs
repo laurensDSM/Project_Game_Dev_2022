@@ -4,9 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Input;
 using Project_Game_Dev_2022.LivesHeart;
+using Project_Game_Dev_2022.Managers;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
+using Project_Game_Dev_2022.HeroMap;
 using System.Collections.Generic;
+using Project_Game_Dev_2022.Game1Map;
 using TiledSharp;
 
 namespace Project_Game_Dev_2022.Levels

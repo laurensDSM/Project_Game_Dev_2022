@@ -5,7 +5,7 @@ using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using Project_Game_Dev_2022.Levels;
 
-namespace Project_Game_Dev_2022
+namespace Project_Game_Dev_2022.Game1Map
 {
     public class Game1 : Game
     {

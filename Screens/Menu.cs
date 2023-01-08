@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
+using Project_Game_Dev_2022.Game1Map;
+using Project_Game_Dev_2022.Managers;
 using TiledSharp;
 
 namespace Project_Game_Dev_2022.Levels

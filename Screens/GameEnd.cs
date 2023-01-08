@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
+using Project_Game_Dev_2022.Managers;
+using Project_Game_Dev_2022.Game1Map;
 using TiledSharp;
 
 namespace Project_Game_Dev_2022.Levels
@@ -30,7 +32,6 @@ namespace Project_Game_Dev_2022.Levels
         public GameEnd(Game game) : base(game)
         {
         }
-
         public override void LoadContent()
         {
             blokTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -121,7 +122,7 @@ namespace Project_Game_Dev_2022.Levels
             Game.SpriteBatch.Begin();
             tilemapManager.Draw(Game.SpriteBatch);
 
-            Game.SpriteBatch.DrawString(Ubuntu32, "Bravo u heeft iedereen gedood", new Vector2(150, 100), Color.White);
+            Game.SpriteBatch.DrawString(Ubuntu32, "Level voltooid !", new Vector2(150, 100), Color.White);
             #region MenuDraw
             if (hoverMenu)
             {
@@ -178,13 +179,6 @@ namespace Project_Game_Dev_2022.Levels
 
             #endregion
             Game.SpriteBatch.End();
-
-
-
-
-
-
-
         }
     }
 }

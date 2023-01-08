@@ -3,9 +3,11 @@ using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Levels;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
+using Project_Game_Dev_2022.HeroMap;
 using System.Collections.Generic;
 
-namespace Project_Game_Dev_2022
+
+namespace Project_Game_Dev_2022.Managers
 {
     public class CollisionManager
     {
@@ -56,7 +58,7 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
-                    if ((toekomstRectangle.Bottom - i.EnemyBox.Top) < 7)
+                    if (toekomstRectangle.Bottom - i.EnemyBox.Top < 7)
                     {
                         hasCollided = true;
                         i.IsAlive = false;
@@ -77,7 +79,7 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
-                    if ((toekomstRectangle.Bottom - i.EnemyBox.Top) < 7)
+                    if (toekomstRectangle.Bottom - i.EnemyBox.Top < 7)
                     {
                         hasCollided = true;
                         i.IsAlive = false;

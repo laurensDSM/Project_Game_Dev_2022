@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using TiledSharp;
 
-namespace Project_Game_Dev_2022
+namespace Project_Game_Dev_2022.Managers
 {
     public class TileMapManager
     {
@@ -33,10 +33,10 @@ namespace Project_Game_Dev_2022
                     {
                         int tileFrame = gid - 1;
                         int column = tileFrame % tilesetTilesWide;
-                        int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-                        float x = (j % map.Width) * map.TileWidth;
+                        int row = (int)Math.Floor(tileFrame / (double)tilesetTilesWide);
+                        float x = j % map.Width * map.TileWidth;
                         float y = (float)Math.Floor(j / (double)map.Width) * map.TileHeight;
-                        Rectangle tilesetRec = new Rectangle((tileWidth) * column, (tileHeight) * row, tileWidth, tileHeight);
+                        Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
                         spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
                     }
                 }
