@@ -12,6 +12,7 @@ namespace Project_Game_Dev_2022.enemy_s
 
         private Vector2 snelheid;
         private Vector2 positieEnemy;
+        private Vector2 positieMeegeven;
         public Rectangle EnemyBox;
         public bool IsAlive = true;
         private Vector2 positieEnemyDead;
@@ -21,6 +22,7 @@ namespace Project_Game_Dev_2022.enemy_s
         {
             enemyTexture = blokTexture;
             positieEnemy = positie;
+            positieMeegeven = positie;
             positieEnemyDead = new Vector2(-100, -100);
             snelheid = new Vector2(1, 0);
 
@@ -45,7 +47,7 @@ namespace Project_Game_Dev_2022.enemy_s
                 animatie.Update(gameTime);
 
                 positieEnemy += snelheid;
-                if (positieEnemy.X > 650 || positieEnemy.X < 580)
+                if (positieEnemy.X > (positieMeegeven.X+50) || positieEnemy.X < (positieMeegeven.X-50))
                 {
                     snelheid.X *= -1;
                 }

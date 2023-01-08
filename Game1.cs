@@ -19,6 +19,12 @@ namespace Project_Game_Dev_2022
         public SpriteBatch _spriteBatch;
         public GraphicsDeviceManager _graphics;
         private readonly ScreenManager _screenManager;
+        enum state
+        {
+            Menu,Level1,Level2,GameOver,GameEnd, Uit
+        }
+        state theState;
+
 
         public Game1()
         {
@@ -60,8 +66,6 @@ namespace Project_Game_Dev_2022
         {
             base.Initialize();
             // Menu screen is het eerst scherm dat ingeladen zal worden bij de opstart van de game
-            MenuScreen();
-
 
         }
 
@@ -77,6 +81,7 @@ namespace Project_Game_Dev_2022
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            State();
 
             KeyboardState keyboardState = Keyboard.GetState();
             if (keyboardState.IsKeyDown(Keys.Escape) || keyboardState.IsKeyDown(Keys.NumPad0) || Menu.Stop == true || GameEnd.Stop == true || GameOver.Stop==true)
@@ -92,50 +97,83 @@ namespace Project_Game_Dev_2022
                 //LEVEL1 START
                 Menu.Start = false;
                 GameEnd.Level1 = false;
-                Debug.WriteLine("Start Level1");
-                Level1Screen();
+                if (theState != state.Level1)
+                {
+                    theState = state.Level1;
 
+                }
+            }
+            else
+            {
+                theState = state.Uit;
 
             }
-            else if (Level1.Level1Completed || Level2.Level2Completed)
+
+
+            if (Level1.Level1Completed || Level2.Level2Completed)
             {
                 Level1.Level1Completed = false;
                 Level2.Level2Completed = false;
-                GameEndScreen();
+                theState = state.GameEnd;
+
 
             }
-            else if (Level1.Level1GameOver || Level2.Level2GameOver)
+            if (Level1.Level1GameOver || Level2.Level2GameOver)
             {
                 Level1.Level1GameOver = false;
                 Level2.Level2GameOver = false;
+                theState = state.GameOver;
 
-                GameOverScreen();
 
             }
 
-            else if (keyboardState.IsKeyDown(Keys.NumPad2) || GameEnd.Level2 == true)
+            if (keyboardState.IsKeyDown(Keys.NumPad2) || GameEnd.Level2 == true)
             {
                 GameEnd.Level2 = false;
-                Level2Screen();
+                theState = state.Level2;
 
             }
-            else if(keyboardState.IsKeyDown(Keys.NumPad9) || GameEnd.Menu== true || GameOver.Menu==true)
+            if(keyboardState.IsKeyDown(Keys.NumPad9) || GameEnd.Menu== true || GameOver.Menu==true)
             {
                 GameEnd.Menu = false;
                 GameOver.Menu = false;
-                MenuScreen();
+                theState = state.Menu;
 
             }
-
-
 
 
             base.Update(gameTime);
 
         }
 
+        public void State()
+        {
+            if (theState == state.Level1)
+            {
+                Level1Screen();
+            }
+            else if (theState == state.Level2)
+            {
+                Level2Screen();
+            }
+            else if (theState == state.Menu)
+            {
+                MenuScreen();
+
+            }
+            else if (theState == state.GameEnd)
+            {
+                GameEndScreen();
+            }
+            else if (theState == state.GameOver)
+            {
+                GameOverScreen();
+            }
+        }
+
         protected override void Draw(GameTime gameTime)
         {
+
             base.Draw(gameTime);
         }
     }

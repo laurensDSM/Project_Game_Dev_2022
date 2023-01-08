@@ -75,9 +75,9 @@ namespace Project_Game_Dev_2022.Levels
             _livesTexture = Content.Load<Texture2D>("heart");
 
             //TRAP valstrik
-            Vector2 EnemyLocatie1 = new Vector2(30, 350);
-            Vector2 EnemyLocatie2 = new Vector2(220, 350);
-            Vector2 EnemyLocatie3 = new Vector2(400, 350);
+            Vector2 EnemyLocatie1 = new Vector2(60, 430);
+            Vector2 EnemyLocatie2 = new Vector2(220, 925);
+            Vector2 EnemyLocatie3 = new Vector2(400, 800);
 
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie1));
             enemyTraps.Add(new EnemyTrap(_trapTexture, EnemyLocatie2));
@@ -87,19 +87,27 @@ namespace Project_Game_Dev_2022.Levels
             enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
 
             //Basic
-            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
+            Vector2 EnemyLocatieBasic1 = new Vector2(570, 430);
+            Vector2 EnemyLocatieBasic2 = new Vector2(270, 690);
+
             enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
+            enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic2));
+
 
             //money
-            Vector2 MoneyLocatie1 = new Vector2(110, 350);
-            Vector2 MoneyLocatie2 = new Vector2(170, 350);
+            Vector2 MoneyLocatie1 = new Vector2(110, 915);
+            Vector2 MoneyLocatie2 = new Vector2(170, 300);
+            Vector2 MoneyLocatie3 = new Vector2(800, 640);
+
 
             money.Add(new Money(_moneyTexture, MoneyLocatie1));
             money.Add(new Money(_moneyTexture, MoneyLocatie2));
+            money.Add(new Money(_moneyTexture, MoneyLocatie3));
+
 
             // Immunity
-            Vector2 ImmunityLocatie1 = new Vector2(320, 70);
-            Vector2 ImmunityLocatie2 = new Vector2(300, 350);
+            Vector2 ImmunityLocatie1 = new Vector2(910, 430);
+            Vector2 ImmunityLocatie2 = new Vector2(910, 800);
             immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie1));
             immunities.Add(new Immunity(_powerupTexture, ImmunityLocatie2));
 
@@ -116,7 +124,7 @@ namespace Project_Game_Dev_2022.Levels
 
 
             //tilemap
-            map = new TmxMap("Content/level1.tmx");
+            map = new TmxMap("Content/level2.tmx");
             tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
             int tileWidth = map.Tilesets[0].TileWidth;
             int tileHeight = map.Tilesets[0].TileHeight;
@@ -135,7 +143,7 @@ namespace Project_Game_Dev_2022.Levels
             var mm = new MovementManager(colliders);
             var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
 
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col, 2);
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col, 3);
 
             //lives
             Vector2 lives1Locatie = new Vector2(900, 10);
@@ -201,7 +209,7 @@ namespace Project_Game_Dev_2022.Levels
 
 
             tilemapManager.Draw(Game._spriteBatch);
-            Game._spriteBatch.DrawString(Ubuntu32, "Level 2", new Vector2(50, 10), Color.White);
+            Game._spriteBatch.DrawString(Ubuntu32, "Level 2", new Vector2(10, 5), Color.Black);
 
 
             foreach (var i in enemysTeleport)

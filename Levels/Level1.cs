@@ -86,7 +86,7 @@ namespace Project_Game_Dev_2022.Levels
             enemysTeleport.Add(new EnemyTeleport(_teleportTexture));
 
             //Basic
-            Vector2 EnemyLocatieBasic1 = new Vector2(640, 350);
+            Vector2 EnemyLocatieBasic1 = new Vector2(700, 425);
             enemyBasic.Add(new EnemyBasic(_enemyBasicTexture, EnemyLocatieBasic1));
 
             //money

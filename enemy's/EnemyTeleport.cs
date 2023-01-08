@@ -27,7 +27,7 @@ namespace Project_Game_Dev_2022.enemy_s
         {
             enemyTexture = blokTexture;
             snelheid = new Vector2(1, 0);
-            positieEnemy = new Vector2(180, 90);
+            positieEnemy = new Vector2(200, 190);
             positieEnemyDead = new Vector2(-20, -20);
             maximalePositieEnemy = new Vector2(20, 20);
 
@@ -57,36 +57,38 @@ namespace Project_Game_Dev_2022.enemy_s
                 TimeSpan span = (Start - StartUpdate);
                 int tijdsverschil = (int)span.TotalSeconds;
 
-                if (tijdsverschil <= -10)
+                if (tijdsverschil <= -7)
                 {
-                    //Debug.WriteLine("Ja 10 seconde");
+                    //Debug.WriteLine("Ja 7 seconde");
 
                     int mogelijkePositie = rand.Next(0, 5);
+
+
                     // Debug.WriteLine(mogelijkePositie);
 
                     switch (mogelijkePositie)
                     {
 
                         case 0:
-                            positieEnemy = new Vector2(10, 70);
+                            positieEnemy = new Vector2(200, 190);
                             counter = 0;
                             Start = DateTime.Now;
 
                             break;
                         case 1:
-                            positieEnemy = new Vector2(300, 350);
+                            positieEnemy = new Vector2(300, 910);
                             counter = 0;
                             Start = DateTime.Now;
 
                             break;
                         case 2:
-                            positieEnemy = new Vector2(400, 70);
+                            positieEnemy = new Vector2(300, 430);
                             counter = 0;
                             Start = DateTime.Now;
 
                             break;
                         case 3:
-                            positieEnemy = new Vector2(180, 350);
+                            positieEnemy = new Vector2(200, 800);
                             counter = 0;
                             Start = DateTime.Now;
 

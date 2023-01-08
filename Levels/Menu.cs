@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
-
+using TiledSharp;
 
 namespace Project_Game_Dev_2022.Levels
 {
@@ -22,7 +22,9 @@ namespace Project_Game_Dev_2022.Levels
         public static bool Start = false;
 
 
-
+        private TmxMap map;
+        private TileMapManager tilemapManager;
+        private Texture2D tileset;
 
         public Menu(Game game) : base(game)
         {
@@ -39,6 +41,13 @@ namespace Project_Game_Dev_2022.Levels
 
             //Text
             Ubuntu32 = Content.Load<SpriteFont>("font/Ubuntu32");
+
+            map = new TmxMap("Content/screen.tmx");
+            tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
+            int tileWidth = map.Tilesets[0].TileWidth;
+            int tileHeight = map.Tilesets[0].TileHeight;
+            int tileSetTileWidth = tileset.Width / tileWidth;
+            tilemapManager = new TileMapManager(map, tileset, tileSetTileWidth, tileWidth, tileHeight);
 
 
             base.LoadContent();
@@ -88,6 +97,7 @@ namespace Project_Game_Dev_2022.Levels
         {
 
             Game._spriteBatch.Begin();
+            tilemapManager.Draw(Game._spriteBatch);
 
             Game._spriteBatch.DrawString(Ubuntu32, "WELKOM BIJ HET SPEL VAN LAURENS", new Vector2(150, 100), Color.White);
             #region StartDraw
