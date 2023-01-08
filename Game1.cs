@@ -146,7 +146,7 @@ namespace Project_Game_Dev_2022
 
         }
 
-        public void State()
+        public void State() //switch 
         {
             if (theState == state.Level1)
             {

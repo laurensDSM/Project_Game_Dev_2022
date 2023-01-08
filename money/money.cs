@@ -17,6 +17,7 @@ namespace Project_Game_Dev_2022.money
 
 
 
+
         public Money(Texture2D blokTexture, Vector2 positie)
         {
             moneyTexture = blokTexture;
@@ -45,6 +46,7 @@ namespace Project_Game_Dev_2022.money
 
             }
         }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {

@@ -1,26 +1,26 @@
-﻿using Microsoft.VisualBasic.Logging;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
 using Project_Game_Dev_2022.enemy_s;
 using Project_Game_Dev_2022.Input;
+using Project_Game_Dev_2022.LivesHeart;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
-using Project_Game_Dev_2022.LivesHeart;
-
 using System.Collections.Generic;
-using System.Diagnostics;
 using TiledSharp;
 
 namespace Project_Game_Dev_2022.Levels
 {
-    public class Level1 : GameScreen
+    public class Level1 : LevelBase 
     {
         // bron is https://www.monogameextended.net/docs/features/screen-management/screen-management/
         private new Game1 Game => (Game1)base.Game;
+
+        public override int Enemies { get ; set ; }
+        
+
         SpriteFont Ubuntu32;
-       // private int counterTest;
+        // private int counterTest;
 
         private Texture2D _heroTexture;
         private Texture2D _trapTexture;
@@ -30,11 +30,13 @@ namespace Project_Game_Dev_2022.Levels
         private Texture2D _powerupTexture;
         private Texture2D _livesTexture;
 
+
+
+
         private Hero hero;
         public static bool Level1Completed = false;
         public static bool Level1GameOver = false;
-
-
+        
         //lives
         private Lives lives1;
         private Lives lives2;
@@ -65,6 +67,8 @@ namespace Project_Game_Dev_2022.Levels
 
         public override void Initialize()
         {
+            Enemies = 2;
+
             _heroTexture = Content.Load<Texture2D>("test");
             _trapTexture = Content.Load<Texture2D>("trap");
             _moneyTexture = Content.Load<Texture2D>("coin");
@@ -72,6 +76,8 @@ namespace Project_Game_Dev_2022.Levels
             _enemyBasicTexture = Content.Load<Texture2D>("EnemyBasic");
             _powerupTexture = Content.Load<Texture2D>("powerups");
             _livesTexture = Content.Load<Texture2D>("heart");
+
+
 
             //TRAP valstrik
             Vector2 EnemyLocatie1 = new Vector2(60, 430);
@@ -144,9 +150,9 @@ namespace Project_Game_Dev_2022.Levels
             }
 
             var mm = new MovementManager(colliders);
-            var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
+            var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities, this);
 
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col,2);
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
 
             //lives
             Vector2 lives1Locatie = new Vector2(900, 10);
@@ -195,12 +201,12 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            if (hero.Enemies==0)
+            if (Enemies == 0)
             {
                 Level1Completed = true;
             }
 
-            if (hero.levels==0)
+            if (hero.levels == 0)
             {
                 Level1GameOver = true;
             }
@@ -211,7 +217,7 @@ namespace Project_Game_Dev_2022.Levels
             Game._spriteBatch.Begin();
 
 
-           tilemapManager.Draw(Game._spriteBatch);
+            tilemapManager.Draw(Game._spriteBatch);
             Game._spriteBatch.DrawString(Ubuntu32, "Level 1", new Vector2(10, 5), Color.Black);
 
 
@@ -242,7 +248,7 @@ namespace Project_Game_Dev_2022.Levels
             {
                 case 1:
                     lives1.Draw(Game._spriteBatch);
-                        break;
+                    break;
                 case 2:
                     lives1.Draw(Game._spriteBatch);
                     lives2.Draw(Game._spriteBatch);

@@ -122,6 +122,9 @@
 /processorParam:TextureFormat=Color
 /build:Mimic Sprite Sheet.png;powerups.png
 
+#begin mixkit-magical-coin-win-1936.wav
+/copy:mixkit-magical-coin-win-1936.wav;moneySound.wav
+
 #begin Pixel Heart Sprite Sheet 32x32.png
 /importer:TextureImporter
 /processor:TextureProcessor

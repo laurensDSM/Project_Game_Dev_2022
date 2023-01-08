@@ -16,10 +16,13 @@ using TiledSharp;
 namespace Project_Game_Dev_2022.Levels
 {
 
-    public class Level2 : GameScreen
+    public class Level2 : LevelBase
     {
         // bron is https://www.monogameextended.net/docs/features/screen-management/screen-management/
         private new Game1 Game => (Game1)base.Game;
+
+        public override int Enemies { get ; set ; }
+
         SpriteFont Ubuntu32;
         // private int counterTest;
 
@@ -42,7 +45,7 @@ namespace Project_Game_Dev_2022.Levels
         private Lives lives3;
 
 
-
+        
 
         #region TileMaps
         private TmxMap map;
@@ -66,6 +69,7 @@ namespace Project_Game_Dev_2022.Levels
 
         public override void Initialize()
         {
+            Enemies = 3;
             _heroTexture = Content.Load<Texture2D>("test");
             _trapTexture = Content.Load<Texture2D>("trap");
             _moneyTexture = Content.Load<Texture2D>("coin");
@@ -141,9 +145,9 @@ namespace Project_Game_Dev_2022.Levels
             }
 
             var mm = new MovementManager(colliders);
-            var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities);
+            var col = new CollisionManager(enemysTeleport, enemyTraps, enemyBasic, money, immunities, this);
 
-            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col, 3);
+            hero = new Hero(_heroTexture, new KeyboardReader(), mm, col);
 
             //lives
             Vector2 lives1Locatie = new Vector2(900, 10);
@@ -192,7 +196,7 @@ namespace Project_Game_Dev_2022.Levels
 
             }
 
-            if (hero.Enemies == 0)
+            if (Enemies == 0)
             {
                 Level2Completed = true;
             }

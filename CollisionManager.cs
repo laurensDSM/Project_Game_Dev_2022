@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Project_Game_Dev_2022.enemy_s;
+using Project_Game_Dev_2022.Levels;
 using Project_Game_Dev_2022.money;
 using Project_Game_Dev_2022.powerups;
 using System.Collections.Generic;
@@ -14,18 +15,20 @@ namespace Project_Game_Dev_2022
         public List<EnemyBasic> EnemiesBasic;
         public List<Money> Money;
         public List<Immunity> Immunities;
+        private LevelBase level;
 
 
 
 
 
-        public CollisionManager(List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money, List<Immunity> immunities)
+        public CollisionManager(List<EnemyTeleport> enemyTeleport, List<EnemyTrap> traps, List<EnemyBasic> enemiesBasic, List<Money> money, List<Immunity> immunities, LevelBase level)
         {
             EnemiesTeleport = enemyTeleport;
             Traps = traps;
             Money = money;
             EnemiesBasic = enemiesBasic;
             Immunities = immunities;
+            this.level = level;
         }
 
         internal bool HasCollidedWithTrap(Hero hero, Rectangle toekomstRectangle)
@@ -70,7 +73,7 @@ namespace Project_Game_Dev_2022
                     {
                         hasCollided = true;
                         i.IsAlive = false;
-                        hero.Enemies--;
+                        level.Enemies--;
 
                     }
                 }
@@ -94,7 +97,7 @@ namespace Project_Game_Dev_2022
                     {
                         hasCollided = true;
                         i.IsAlive = false;
-                        hero.Enemies--;
+                        level.Enemies--;
 
                     }
                 }
@@ -120,7 +123,9 @@ namespace Project_Game_Dev_2022
                     i.IsUsed = true;
 
                     hero.money = hero.money + 1;
-                    Debug.WriteLine(hero.money);
+                    Wallet.Instance.Value = +5;
+                    Debug.WriteLine(Wallet.Instance.Value);
+
 
                     //Debug.WriteLine("collision");
 

@@ -26,7 +26,6 @@ namespace Project_Game_Dev_2022
 
         private Vector2 snelheid;
         private Vector2 positieHero;
-        public int Enemies;
         Rectangle hitBox;
         internal bool canJump;
         internal bool isFalling;
@@ -53,7 +52,7 @@ namespace Project_Game_Dev_2022
 
 
 
-        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm , CollisionManager col, int aantalEnemies )
+        public Hero(Texture2D blokTexture, IInputReader inputReader, MovementManager mm , CollisionManager col)
         {
             canJump = true;
             isFalling = true;
@@ -64,7 +63,6 @@ namespace Project_Game_Dev_2022
             InputReader = inputReader;
             snelheid = new Vector2(5, 5);
             positieHero = new Vector2(70, 70);
-            Enemies = aantalEnemies;
             
 
             animatie = new Animatie();

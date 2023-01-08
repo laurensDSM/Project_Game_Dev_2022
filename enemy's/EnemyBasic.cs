@@ -8,7 +8,6 @@ namespace Project_Game_Dev_2022.enemy_s
     {
 
         Texture2D enemyTexture;
-        Animatie animatie;
 
         private Vector2 snelheid;
         private Vector2 positieEnemy;
@@ -17,6 +16,7 @@ namespace Project_Game_Dev_2022.enemy_s
         public bool IsAlive = true;
         private Vector2 positieEnemyDead;
 
+        public SpriteEffects effects;
 
         public EnemyBasic(Texture2D blokTexture, Vector2 positie)
         {
@@ -25,16 +25,12 @@ namespace Project_Game_Dev_2022.enemy_s
             positieMeegeven = positie;
             positieEnemyDead = new Vector2(-100, -100);
             snelheid = new Vector2(1, 0);
+            effects = SpriteEffects.None;
 
-            animatie = new Animatie();
             animatie.AddFrame(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
             animatie.AddFrame(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
-
-
-
-
             EnemyBox = new Rectangle((int)positieEnemy.X, (int)positieEnemy.Y, 10 * 5, 10 * 5);
 
         }
@@ -50,11 +46,14 @@ namespace Project_Game_Dev_2022.enemy_s
                 if (positieEnemy.X > (positieMeegeven.X+50) || positieEnemy.X < (positieMeegeven.X-50))
                 {
                     snelheid.X *= -1;
+                    effects = SpriteEffects.FlipHorizontally;
                 }
             }
             else
             {
                 positieEnemy = positieEnemyDead;
+                effects = SpriteEffects.None;
+
             }
 
 
@@ -64,6 +63,7 @@ namespace Project_Game_Dev_2022.enemy_s
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(enemyTexture, EnemyBox, animatie.CurrentFrame.SourceRectangle, Color.LightBlue);
+
 
         }
     }
