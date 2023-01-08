@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Project_Game_Dev_2022.money
 {
-    public class Wallet
+    public class Powerups
     {
         public int Value { get; set; }
-        private Wallet()
+        private Powerups()
         {
         }
-        private static Wallet _instance = new Wallet();
-        public static Wallet Instance
+        private static Powerups _instance = new Powerups();
+        public static Powerups Instance
         {
             get { return _instance; }
         }

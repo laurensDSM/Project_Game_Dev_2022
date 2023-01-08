@@ -5,7 +5,6 @@ namespace Project_Game_Dev_2022.Input
 {
     class KeyboardReader : IInputReader
     {
-
         public Vector2 ReadInput()
         {
             KeyboardState state = Keyboard.GetState();
@@ -28,7 +27,5 @@ namespace Project_Game_Dev_2022.Input
             }
             return direction;
         }
-
-
     }
 }

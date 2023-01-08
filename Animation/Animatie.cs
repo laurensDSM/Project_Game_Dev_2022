@@ -3,18 +3,16 @@ using System.Collections.Generic;
 
 namespace Project_Game_Dev_2022.Animation
 {
-    public class Animatie
+    public class Animation
     {
         public AnimationFrame CurrentFrame { get; set; }
         private List<AnimationFrame> frames;
-
         private int counter;
         private double secondCounter = 0;
 
-        public Animatie()
+        public Animation()
         {
             frames = new List<AnimationFrame>();
-
         }
         public void AddFrame(AnimationFrame animationFrame)
         {
@@ -24,24 +22,17 @@ namespace Project_Game_Dev_2022.Animation
         public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
-
             secondCounter += gameTime.ElapsedGameTime.TotalSeconds;
             int fps = 15;
-
             if (secondCounter >= 1d / fps)
             {
                 counter++;
                 secondCounter = 0;
             }
-
             if (counter >= frames.Count)
             {
                 counter = 0;
             }
-
         }
-
-
-
     }
 }

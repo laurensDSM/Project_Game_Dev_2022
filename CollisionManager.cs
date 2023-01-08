@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.enemies;
 using Project_Game_Dev_2022.Levels;
 using Project_Game_Dev_2022.money;
@@ -26,32 +24,29 @@ namespace Project_Game_Dev_2022
             Immunities = immunities;
             this.level = level;
         }
-
         internal bool HasCollidedWithTrap(Hero hero, Rectangle toekomstRectangle)
         {
             bool hasCollided = false;
             foreach (var i in Traps)
             {
-                if (toekomstRectangle.Intersects(i.EnemyBox))
+                if (toekomstRectangle.Intersects(i.EnemyHitBox))
                 {
                     hasCollided = true;
                     i.IsAlive = false;
                     if (hero.immunity == 0)
                     {
-
                         hero.levels--;
-
                     }
                     if (hero.immunity > 0)
                     {
                         hero.immunity--;
-
                     }
-
+                    if (Powerups.Instance.Value >= 1)
+                    {
+                        Powerups.Instance.Value = Powerups.Instance.Value - 1;
+                    }
                 }
-
             }
-
             return hasCollided;
         }
         internal bool HasCollidedWithEnemieTeleport(Hero hero, Rectangle toekomstRectangle)
@@ -66,7 +61,6 @@ namespace Project_Game_Dev_2022
                         hasCollided = true;
                         i.IsAlive = false;
                         level.Enemies--;
-
                     }
                 }
                 else
@@ -74,7 +68,6 @@ namespace Project_Game_Dev_2022
                     hasCollided = false;
                 }
             }
-
             return hasCollided;
         }
         internal bool HasCollidedWithEnemieBasic(Hero hero, Rectangle toekomstRectangle)
@@ -84,13 +77,11 @@ namespace Project_Game_Dev_2022
             {
                 if (toekomstRectangle.Intersects(i.EnemyBox))
                 {
-
                     if ((toekomstRectangle.Bottom - i.EnemyBox.Top) < 7)
                     {
                         hasCollided = true;
                         i.IsAlive = false;
                         level.Enemies--;
-
                     }
                 }
                 else
@@ -98,10 +89,8 @@ namespace Project_Game_Dev_2022
                     hasCollided = false;
                 }
             }
-
             return hasCollided;
         }
-
         internal bool HasCollidedWithMoney(Hero hero, Rectangle toekomstRectangle)
         {
             bool hasCollided = false;
@@ -120,20 +109,18 @@ namespace Project_Game_Dev_2022
                 }
             }
             return hasCollided;
-
         }
         internal bool HasCollidedWithImmunity(Hero hero, Rectangle toekomstRectangle)
         {
             bool hasCollided = false;
-
             foreach (var i in Immunities)
             {
                 if (toekomstRectangle.Intersects(i.ImmunityBox))
                 {
-
                     hasCollided = true;
                     i.IsUsed = true;
                     hero.immunity++;
+                    Powerups.Instance.Value = Powerups.Instance.Value + 1;
                 }
                 else
                 {

@@ -10,7 +10,6 @@ namespace Project_Game_Dev_2022
         {
             CollideablesLevel = collideablesLevel;
         }
-
         internal bool HasCollided(Hero hero, Rectangle toekomstRectangle)
         {
             foreach (var item in CollideablesLevel)
@@ -36,32 +35,34 @@ namespace Project_Game_Dev_2022
                 }
             }
             return false;
-
         }
-
         internal Vector2 Move(Hero hero, Vector2 direction)
         {
             if (direction.Y == -1)
             {
-
-                if (hero.canJump && hero.counter <= 30)  //als canjump waar is dan is hij niet aan het vallen
+                if (hero.canJump && hero.counter <= 30)
                 {
                     hero.isFalling = false;
                     hero.counter++;
-
                 }
                 else  
                 {
                     hero.isFalling = true;
                 }
             }
-
+            if (direction.X == +1 || direction.X == 0)
+            {
+                hero.left = true;
+            }
+            else
+            {
+                hero.left = false;
+            }
             if (hero.isFalling)
             {
                 direction.Y = 1;
             }
             return direction;
         }
-
     }
 }
