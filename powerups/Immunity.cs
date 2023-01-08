@@ -2,10 +2,11 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Project_Game_Dev_2022.Animation;
+using Project_Game_Dev_2022.interfaces;
 
 namespace Project_Game_Dev_2022.powerups
 {
-    public class Immunity
+    public class Immunity :IGameObject
     {
         Animation.Animation animation;
         private Vector2 immunityMoney;

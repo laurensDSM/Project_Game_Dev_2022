@@ -31,6 +31,7 @@ namespace Project_Game_Dev_2022.Managers
             bool hasCollided = false;
             foreach (var i in Traps)
             {
+                hero.immunity = Powerups.Instance.Value;
                 if (toekomstRectangle.Intersects(i.EnemyHitBox))
                 {
                     hasCollided = true;
